@@ -7,3 +7,5 @@ resolve the following problems:-
 
 <img src="4/ss1.png">
 <img src="4/ss2.png">
+<img src="4/ss3.png">
+<img src="4/ss4.png">
