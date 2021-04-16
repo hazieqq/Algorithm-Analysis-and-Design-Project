@@ -6,3 +6,4 @@ resolve the following problems:-
 
 
 <img src="4/ss1.png">
+<img src="4/ss2.png">
