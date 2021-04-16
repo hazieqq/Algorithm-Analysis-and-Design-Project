@@ -9,4 +9,4 @@ fast (assuming that the shorter the distance, the quicker is the delivery). The 
 (5) local courier companies which have their delivery hubs located in various locations in West Malaysia.
 The details of the courier companies and their delivery hubs are given in Table 1.
 
-<img src="ss1">
+<img src="4/ss1.png">
