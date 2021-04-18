@@ -4,7 +4,7 @@
     <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
     <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
     <title>Google Maps - gmplot</title>
-    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?libraries=visualization&key=yourkey"></script>
+    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?libraries=visualization&key=apikey"></script>
     <script type="text/javascript">
         function initialize() {
             var map = new google.maps.Map(document.getElementById("map_canvas"), {
@@ -61,6 +61,23 @@
             new google.maps.Marker({
                 position: new google.maps.LatLng(3.100017, 101.530715),
                 icon: marker_icon_FF0000,
+                map: map
+            });
+
+            var marker_icon_800080 = {
+                url: "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABUAAAAiCAYAAACwaJKDAAAABmJLR0QA/wD/AP+gvaeTAAACtElEQVRIia3VQWiTZxzH8U8SY5kQEoYH3Q4BZUWstbeuoO6klx08enOXuYOnHYTBbmM7DHYZ7OLYQea8DS8RFIR1wpjMdjJWY6lWIwnSxm5jNbTaUvPm3aFv1iaNzdu0v8vD+3/+v+/L8zz///MkbK4BHMfbSKKBGfyKyS7eDTqJcYRZ2bBff3jU0bBff5iVDRFG8yc7mRMdvr9MSHwyYCBxzDH77JNoS6uquu22SZNhKPwKn0Y/Aqk24Nd9+i6ccSZxwgkZmQ1AyMg47LD99iceeXQ8EORwsxP04112fXbWWQcc6LY9YK+98vKKiiMNjXmMrYe+hcIpp9JHHIkFbCorKy2tpPQevsdCMpo7n5PbM2x4S8Cmhg3Lye3BeVbLBE4PGZJq2Y34SkkZMgSnm9AUDuXlewI2FfkPIZVEGruzstuCRv7dSCe75PakJFaw8tzzbYEi/wpWmv08VVHZFjTyT6HRXP61CRMCQU/AQGDCBFxjraQu1tQW77jTE3TMmJraIi6y1lGLWKiovJ+Xl5OLDayoKChoaFzAz+uhMB4K35wy9e5BB2VkugKrqq644pVX3+DzZry9hW4GgnemTQ8OGtSn77XAl1667LIXXvyIc+vn2us0xLkFC8WCgnDtitygG26oqU3jQ1oTOxX/Ej547HG9qNgR+MQT992Hj6yeR4te11F/4ttRo+rqbUsJjRqFq/ilk3mzNv2iprZ0z72WYFnZjJnQuoPZCvQv/DBuvCV4111WS6fz3nSBwnfPPDNnDixb9tBDuLSZqRv0D0w/8ACUlNTVl0Tt2CsUrpeU/ofilg4nvlXorVmzAoGyMvzUzRAH+ntd3VNPzZuH32J4YunvESMh6nijW3Lc56QcXcIVqx23I9B/oqXHeh7iQv9dtgwLOwmdi8bZnYRWo7EcJ/k/HoHgSz/Z7awAAAAASUVORK5CYII=",
+                labelOrigin: new google.maps.Point(10, 11)
+            };
+
+            new google.maps.Marker({
+                position: new google.maps.LatLng(3.049398, 101.585466),
+                icon: marker_icon_800080,
+                map: map
+            });
+
+            new google.maps.Marker({
+                position: new google.maps.LatLng(3.227994, 101.427304),
+                icon: marker_icon_800080,
                 map: map
             });
 
