@@ -5,7 +5,7 @@ import requests
 import urllib, json
 
 
-apikey='AIzaSyALoQuHQws1uow3VCluraRw97xWY3dqKnI'
+apikey='MY_SECRET'
 gmap = gmplot.GoogleMapPlotter(4.2105, 101.9758, 14, apikey=apikey)
 
 gmap.marker(3.0319924887507144,101.37344116244806, color='cornflowerblue') #citylink 
@@ -54,7 +54,7 @@ for i in range(3):
             +stick1
             +"&destinations="
             +stick2
-            +"&key=AIzaSyALoQuHQws1uow3VCluraRw97xWY3dqKnI"
+            +"&key=MY_SECRET"
             )
     output = requests.get(url).json()
     
@@ -74,13 +74,13 @@ for i in range(3):
             +stick1
             +"&destinations="
             +stick3
-            +"&key=AIzaSyALoQuHQws1uow3VCluraRw97xWY3dqKnI"
+            +"&key=MY_SECRET"
             )
         url1 = ("https://maps.googleapis.com/maps/api/distancematrix/json?units=km&origins="
             +stick3
             +"&destinations="
             +stick2
-            +"&key=AIzaSyALoQuHQws1uow3VCluraRw97xWY3dqKnI"
+            +"&key=MY_SECRET"
             )
         output = requests.get(url).json()
         output1 = requests.get(url1).json()
