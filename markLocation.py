@@ -5,7 +5,7 @@ import requests
 import urllib, json
 
 
-apikey=''
+apikey='AIzaSyALoQuHQws1uow3VCluraRw97xWY3dqKnI'
 gmap = gmplot.GoogleMapPlotter(4.2105, 101.9758, 14, apikey=apikey)
 
 gmap.marker(3.0319924887507144,101.37344116244806, color='cornflowerblue') #citylink 
@@ -54,7 +54,7 @@ for i in range(3):
             +stick1
             +"&destinations="
             +stick2
-            +"&key="
+            +"&key=AIzaSyALoQuHQws1uow3VCluraRw97xWY3dqKnI"
             )
     output = requests.get(url).json()
     
@@ -80,7 +80,7 @@ for i in range(3):
             +stick3
             +"&destinations="
             +stick2
-            +"&key=apikey"
+            +"&key=AIzaSyALoQuHQws1uow3VCluraRw97xWY3dqKnI"
             )
         output = requests.get(url).json()
         output1 = requests.get(url1).json()
@@ -88,16 +88,16 @@ for i in range(3):
         distanceOriginToHub1 = str(output1["rows"][0]["elements"][0]["distance"]["text"])
         distance.append((float(distanceOriginToHub.split()[0])) + float(distanceOriginToHub1.split()[0]))
 
-    for i in range(0,len(hub)):
+    for k in range(0,len(hub)):
         for j in range(1,len(hub)):
-            if distance[i] > distance[j]:
+            if distance[k] > distance[j]:
                 temp = distance[j]
-                distance[j] = distance[i]
-                distance[i] = temp
+                distance[j] = distance[k]
+                distance[k] = temp
 
                 temp1 = hub[j]
-                hub[j] = hub[i]
-                hub[i] = temp1
+                hub[j] = hub[k]
+                hub[k] = temp1
     shortest.append(distance[0])
     hubshortest.append(hub[0])
 print(shortest)
