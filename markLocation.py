@@ -2,10 +2,12 @@ from geopy.geocoders import Nominatim
 import gmplot
 import googlemaps
 import requests
-import urllib, json
+from test import sendmessege
 
+x= sendmessege()
+print(x.a)
 
-apikey='MY_SECRET'
+apikey='AIzaSyALoQuHQws1uow3VCluraRw97xWY3dqKnI'
 gmap = gmplot.GoogleMapPlotter(4.2105, 101.9758, 14, apikey=apikey)
 
 gmap.marker(3.0319924887507144,101.37344116244806, color='cornflowerblue') #citylink 
@@ -54,7 +56,7 @@ for i in range(3):
             +stick1
             +"&destinations="
             +stick2
-            +"&key=MY_SECRET"
+            +"&key=AIzaSyALoQuHQws1uow3VCluraRw97xWY3dqKnI"
             )
     output = requests.get(url).json()
     
@@ -74,13 +76,13 @@ for i in range(3):
             +stick1
             +"&destinations="
             +stick3
-            +"&key=MY_SECRET"
+            +"&key=AIzaSyALoQuHQws1uow3VCluraRw97xWY3dqKnI"
             )
         url1 = ("https://maps.googleapis.com/maps/api/distancematrix/json?units=km&origins="
             +stick3
             +"&destinations="
             +stick2
-            +"&key=MY_SECRET"
+            +"&key=AIzaSyALoQuHQws1uow3VCluraRw97xWY3dqKnI"
             )
         output = requests.get(url).json()
         output1 = requests.get(url1).json()
@@ -102,6 +104,7 @@ for i in range(3):
     hubshortest.append(hub[0])
 print(shortest)
 print(hubshortest)
+
 
     
 
