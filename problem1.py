@@ -19,6 +19,7 @@ cust3Dest = (2.9188704151716256, 101.65251821655471)
 
 courierCoorLats, courierCoorLangs = zip(
     *[cityLinkHub, posLajuHub, gdexHub, jntHub, dhlHub])
+
 courierNames = ['City-link Express', 'Pos Laju', 'GDEX', 'J&T', 'DHL']
 
 
@@ -72,6 +73,7 @@ def printAfterDistance(customer_ori_lats, customer_ori_lngs,
         stick1 = str(customer_ori_lats[i]) + "," + str(customer_ori_lngs[i])
         stick2 = str(customer_dest_lats[i]) + "," + str(customer_dest_lngs[i])
         distance = []
+        courierNames = ['City-link Express', 'Pos Laju', 'GDEX', 'J&T', 'DHL']
         for j in range(5):
             stick3 = str(courierCoorLats[j]) + "," + str(courierCoorLangs[j])
             urlOriginToHub = ("https://maps.googleapis.com/maps/api/distancematrix/json?units=km&origins="
@@ -86,6 +88,9 @@ def printAfterDistance(customer_ori_lats, customer_ori_lngs,
                 outputHubToDest["rows"][0]["elements"][0]["distance"]["text"])
             distance.append((float(distanceOriginToHub.split()[
                             0])) + float(distanceHubToDest.split()[0]))
+        small = min(distance)
+        min_index = distance.index(small)
+
 
         for k in range(len(courierNames)):
             for j in range(1, len(courierNames)):
@@ -97,7 +102,8 @@ def printAfterDistance(customer_ori_lats, customer_ori_lngs,
                     temp1 = courierNames[j]
                     courierNames[j] = courierNames[k]
                     courierNames[k] = temp1
-
+               
+            break
         print('Closest courier hub to Customer', i+1, ':', courierNames[0])
         print('Distance for Customer', i+1, '(After):', distance[0], 'km')
 
