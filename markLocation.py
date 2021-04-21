@@ -2,10 +2,7 @@ from geopy.geocoders import Nominatim
 import gmplot
 import googlemaps
 import requests
-from test import sendmessege
 
-x= sendmessege()
-print(x.a)
 
 apikey='AIzaSyALoQuHQws1uow3VCluraRw97xWY3dqKnI'
 gmap = gmplot.GoogleMapPlotter(4.2105, 101.9758, 14, apikey=apikey)
