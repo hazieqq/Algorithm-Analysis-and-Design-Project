@@ -1,4 +1,3 @@
-from geopy.geocoders import Nominatim
 import gmplot
 import requests
 
@@ -32,6 +31,7 @@ distCust2BefPath = zip(*[cust2Ori, cust2Dest])
 distCust3BefPath = zip(*[cust3Ori, cust3Dest])
 
 chosenCourier = []
+
 
 def markLocation(gmap, courierCoorLats, courierCoorLangs,
                  cust1Ori, cust1Dest, cust2Ori, cust2Dest, cust3Ori, cust3Dest):
@@ -89,9 +89,6 @@ def printAfterDistance(customer_ori_lats, customer_ori_lngs,
                 outputHubToDest["rows"][0]["elements"][0]["distance"]["text"])
             distance.append((float(distanceOriginToHub.split()[
                             0])) + float(distanceHubToDest.split()[0]))
-        small = min(distance)
-        min_index = distance.index(small)
-
 
         for k in range(len(courierNames)):
             for j in range(1, len(courierNames)):
@@ -103,12 +100,12 @@ def printAfterDistance(customer_ori_lats, customer_ori_lngs,
                     temp1 = courierNames[j]
                     courierNames[j] = courierNames[k]
                     courierNames[k] = temp1
-               
             break
+
         print('Closest courier hub to Customer', i+1, ':', courierNames[0])
         print('Distance for Customer', i+1, '(After):', distance[0], 'km')
 
-        if courierNames[0] == 'City-link Express' :
+        if courierNames[0] == 'City-link Express':
             chosenCourier.append(cityLinkHub)
         elif courierNames[0] == 'Pos Laju':
             chosenCourier.append(posLajuHub)
@@ -121,13 +118,6 @@ def printAfterDistance(customer_ori_lats, customer_ori_lngs,
 
         elif courierNames[0] == 'DHL':
             chosenCourier.append(dhlHub)
-
-
-def printAddress(geolocator, coorLats, coorLangs):
-    for i in range(5):
-        location = geolocator.reverse(
-            str(coorLats[i]) + "," + str(coorLangs[i]))
-        print(location.address)
 
 
 apikey = 'AIzaSyALoQuHQws1uow3VCluraRw97xWY3dqKnI'
@@ -156,14 +146,14 @@ gmap.directions(cust2Ori, cust2Dest)
 gmap.directions(cust3Ori, cust3Dest)
 
 # after algo
-gmap.directions(cust1Ori, chosenCourier[0]) 
+gmap.directions(cust1Ori, chosenCourier[0])
 gmap.directions(chosenCourier[0], cust1Dest)
 
-gmap.directions(cust2Ori, chosenCourier[1]) 
-gmap.directions(chosenCourier[1], cust2Dest) 
+gmap.directions(cust2Ori, chosenCourier[1])
+gmap.directions(chosenCourier[1], cust2Dest)
 
-gmap.directions(cust3Ori, chosenCourier[2]) 
-gmap.directions(chosenCourier[2], cust3Dest) 
+gmap.directions(cust3Ori, chosenCourier[2])
+gmap.directions(chosenCourier[2], cust3Dest)
 
 
 gmap.draw('map.html')
