@@ -31,6 +31,7 @@ distCust1BefPath = zip(*[cust1Ori, cust1Dest])
 distCust2BefPath = zip(*[cust2Ori, cust2Dest])
 distCust3BefPath = zip(*[cust3Ori, cust3Dest])
 
+chosenCourier = []
 
 def markLocation(gmap, courierCoorLats, courierCoorLangs,
                  cust1Ori, cust1Dest, cust2Ori, cust2Dest, cust3Ori, cust3Dest):
@@ -107,6 +108,20 @@ def printAfterDistance(customer_ori_lats, customer_ori_lngs,
         print('Closest courier hub to Customer', i+1, ':', courierNames[0])
         print('Distance for Customer', i+1, '(After):', distance[0], 'km')
 
+        if courierNames[0] == 'City-link Express' :
+            chosenCourier.append(cityLinkHub)
+        elif courierNames[0] == 'Pos Laju':
+            chosenCourier.append(posLajuHub)
+
+        elif courierNames[0] == 'GDEX':
+            chosenCourier.append(gdexHub)
+
+        elif courierNames[0] == 'J&T':
+            chosenCourier.append(jntHub)
+
+        elif courierNames[0] == 'DHL':
+            chosenCourier.append(dhlHub)
+
 
 def printAddress(geolocator, coorLats, coorLangs):
     for i in range(5):
@@ -139,4 +154,16 @@ printAfterDistance(customer_ori_lats, customer_ori_lngs,
 gmap.directions(cust1Ori, cust1Dest)
 gmap.directions(cust2Ori, cust2Dest)
 gmap.directions(cust3Ori, cust3Dest)
+
+# after algo
+gmap.directions(cust1Ori, chosenCourier[0]) 
+gmap.directions(chosenCourier[0], cust1Dest)
+
+gmap.directions(cust2Ori, chosenCourier[1]) 
+gmap.directions(chosenCourier[1], cust2Dest) 
+
+gmap.directions(cust3Ori, chosenCourier[2]) 
+gmap.directions(chosenCourier[2], cust3Dest) 
+
+
 gmap.draw('map.html')
