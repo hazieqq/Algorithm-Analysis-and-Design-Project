@@ -28,14 +28,17 @@ try:
     wordstring = wordstring.replace('"',"")
     wordlist = re.findall(r"[\w&']+", wordstring)
 
-    #remove duplicate
+    #remove duplicate & print to text file
 
+    output = open("data.txt", "w")
     c = Counter(wordlist)
     a = list(c.values())
     b = list(c.keys())
     for i in range(len(a)):
         print('{},{}'.format(b[i],a[i]))
-
+        output.write('{},{}'.format(b[i],a[i])+"\n")
+    
+    output.close()
     text_file.close()
     driver.close()
 except FileNotFoundError:
