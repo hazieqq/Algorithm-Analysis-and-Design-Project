@@ -1,7 +1,7 @@
 import re
 
 try:
-    stop_word_file = open("stopwords.txt", "r")
+    stop_word_file = open("Problem 2\stopwords.txt", "r")
 
     article = open("sample.txt","r")
 

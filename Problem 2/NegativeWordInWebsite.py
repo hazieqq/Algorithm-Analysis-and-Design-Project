@@ -8,9 +8,9 @@ try:
     PATH = "Problem 2\chromedriver.exe"
     driver = webdriver.Chrome(PATH)
 
-    driver.get("http://positivewordsresearch.com/list-of-positive-words/")
+    driver.get("https://positivewordsresearch.com/list-of-negative-words/")
 
-    text_file = open("positiveWord.txt", "w")
+    text_file = open("negativeWord.txt", "w")
     page = driver.page_source
     page_soup = BeautifulSoup(page,'html.parser')
 
@@ -21,7 +21,7 @@ try:
 
     text_file.close()
 
-    filename = 'positiveWord.txt'
+    filename = 'negativeWord.txt'
     file = open(filename, 'r')
     text = file.read()
     file.close()
@@ -31,19 +31,19 @@ try:
     text = re.sub("\s\s+" , "\n", text)
     text = text.lower()
     print(text)
-    File = open(r"positiveWord.txt", "w")
+    File = open(r"negativeWord.txt", "w")
     File.write(text)
     File.close()
 
     #compare two files, if same output put into another file 
     #(txt file website yang kita scrape with scraped positive file)
     with open('update_news.txt', 'r') as file1:
-        with open('positiveWord.txt', 'r') as file2:
+        with open('negativeWord.txt', 'r') as file2:
             same = set(file1).intersection(file2)
 
     same.discard('\n')
 
-    with open('OutputPositive.txt', 'w') as file_out:
+    with open('OutputNegative.txt', 'w') as file_out:
         for line in same:
             file_out.write(line)
 
