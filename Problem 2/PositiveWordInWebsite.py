@@ -26,14 +26,26 @@ try:
     text = file.read()
     file.close()
 
+    
+
+    
+
     text = re.sub("[(,){}<>:.[']", '', text)
     text = text.replace(",  ", '')
     text = re.sub("\s\s+" , "\n", text)
     text = text.lower()
-    print(text)
     File = open(r"positiveWord.txt", "w")
     File.write(text)
+
     File.close()
+
+    filename1 = 'sample.txt'
+    file1 = open(filename1,'r')
+    text1 = file1.read()
+    text1 = text1.lower()
+    text1 = re.findall(r'[\w]+',text1)
+
+    
 
     #compare two files, if same output put into another file 
     #(txt file website yang kita scrape with scraped positive file)
@@ -47,5 +59,17 @@ try:
         for line in same:
             file_out.write(line)
 
+    filename2 = 'OutputPositive.txt'
+    file2 = open(filename2,'r')
+    text2 = file2.read()
+    text2 = text2.split()
+    index =0
+
+    for i in range(len(text2)):
+        for j in range(len(text1)):
+            if text1[j] == text2[i]:
+                index += 1
+        print('{},{}'.format(text2[i],index))
+        index =0
 except FileNotFoundError:
     print("file not found")

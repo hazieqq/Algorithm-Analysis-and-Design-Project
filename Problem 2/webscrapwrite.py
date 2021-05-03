@@ -27,7 +27,7 @@ try:
     wordstring = wordstring.lower()
     wordstring = wordstring.replace('"', "")
     wordlist = re.findall(r"[\w&']+", wordstring)
-
+    print(wordlist)
     # remove duplicate & print to text file
 
     output = open("data.txt", "w")
@@ -35,7 +35,7 @@ try:
     a = list(c.values())
     b = list(c.keys())
     for i in range(len(a)):
-        print('{},{}'.format(b[i], a[i]))
+        # print('{},{}'.format(b[i], a[i]))
         output.write('{},{}'.format(b[i], a[i])+"\n")
 
     output.close()
