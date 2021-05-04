@@ -1,6 +1,7 @@
 from selenium import webdriver
 from bs4 import BeautifulSoup
 import re
+import os
 
 
 def webScrape(driver, URL, fileName):
@@ -24,19 +25,22 @@ def readPositiveFile(fileName):
     return text
 
 
-def writePositiveFile(text):
+def writePositiveFile(text, fileName):
     text = re.sub("[(,){}<>:.[']", '', text)
     text = text.replace(",  ", '')
     text = re.sub("\s\s+", "\n", text)
     text = text.lower()
-    File = open(r"positiveWord.txt", "w")
+    File = open(fileName, "w")
     File.write(text)
     File.close()
 
 
 def readSampleText():
-    filename1 = 'sample.txt'
-    file1 = open(filename1, 'r')
+    savePath = 'Problem 2\J&T\Article 1'
+    fileName1 = 'sample.txt'
+    sampleText = os.path.join(savePath, fileName1)
+
+    file1 = open(sampleText, 'r')
     text = file1.read()
     text = text.lower()
     text = re.findall(r'[\w]+', text)
@@ -47,7 +51,11 @@ def readSampleText():
 def outputPositive(fileName1, fileName2):
     # compare two files, if same output put into another file
     # (txt file website yang kita scrape with scraped positive file)
-    with open('update_news.txt', 'r') as file1:
+    savePath = 'Problem 2\J&T\Article 1'
+    fileName = 'update_news.txt'
+    upNewsText = os.path.join(savePath, fileName)
+
+    with open(upNewsText, 'r') as file1:
         with open(fileName1, 'r') as file2:
             same = set(file1).intersection(file2)
     same.discard('\n')
@@ -69,7 +77,11 @@ def writeFreqPos(text1, text2):
     index = 0
     sum = 0
 
-    writeFile = open('freqPos.txt', 'w')
+    savePath = 'Problem 2\J&T\Article 1'
+    fileName = 'freqPos.txt'
+    freqPosText = os.path.join(savePath, fileName)
+
+    writeFile = open(freqPosText, 'w')
     for i in range(len(text2)):
         for j in range(len(text1)):
             if text1[j] == text2[i]:
@@ -84,25 +96,32 @@ def writeFreqPos(text1, text2):
 
 
 def writeTotalPos(sum):
-    with open('totalPosNeg.txt', 'w') as file:
+    savePath = 'Problem 2\J&T\Article 1'
+    fileName = 'totalPosNeg.txt'
+    totalPosNegText = os.path.join(savePath, fileName)
+
+    with open(totalPosNegText, 'w') as file:
         file.write('{},{}'.format('Positive Words', sum)+"\n")
 
 
 try:
     PATH = "Problem 2\chromedriver.exe"
     URL = "http://positivewordsresearch.com/list-of-positive-words/"
-
     driver = webdriver.Chrome(PATH)
-    fileName1 = 'positiveWord.txt'
-    webScrape(driver, URL, fileName1)
 
-    text = readPositiveFile(fileName1)
-    writePositiveFile(text)
+    savePath = 'Problem 2\J&T\Article 1'
+    fileName1 = 'positiveWord.txt'
+    posWordText = os.path.join(savePath, fileName1)
+    webScrape(driver, URL, posWordText)
+
+    text = readPositiveFile(posWordText)
+    writePositiveFile(text, posWordText)
     text1 = readSampleText()
 
     fileName2 = 'OutputPositive.txt'
-    outputPositive(fileName1, fileName2)
-    text2 = readOutputPositive(fileName2)
+    outPosText = os.path.join(savePath, fileName2)
+    outputPositive(posWordText, outPosText)
+    text2 = readOutputPositive(outPosText)
     sum = writeFreqPos(text1, text2)
     writeTotalPos(sum)
 

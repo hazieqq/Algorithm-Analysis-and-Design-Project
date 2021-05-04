@@ -1,16 +1,22 @@
 from selenium import webdriver
-from bs4 import BeautifulSoup, NavigableString
+from bs4 import BeautifulSoup
 from collections import Counter
 import re
+import os
 #5 (a)
 try:
     PATH = "Problem 2\chromedriver.exe"
+    URL = "https://www.nst.com.my/news/nation/2021/02/663907/violent-sorting-parcels-jt-apologises-customers"
     driver = webdriver.Chrome(PATH)
+    savePath = 'Problem 2\J&T\Article 1'
+    fileName1 = "sample.txt"
+    fileName2 = "data.txt"
+    sampleText = os.path.join(savePath, fileName1)
+    dataText = os.path.join(savePath, fileName2)
 
-    driver.get(
-        "https://www.nst.com.my/news/nation/2021/02/663907/violent-sorting-parcels-jt-apologises-customers")
+    driver.get(URL)
 
-    text_file = open("sample.txt", "w")
+    text_file = open(sampleText, "w")
 
     page = driver.page_source
     page_soup = BeautifulSoup(page, 'html.parser')
@@ -22,7 +28,7 @@ try:
 
     # 5(b)
 
-    text_file = open("sample.txt", "r")
+    text_file = open(sampleText, "r")
     wordstring = text_file.read()
     wordstring = wordstring.lower()
     wordstring = wordstring.replace('"', "")
@@ -30,7 +36,7 @@ try:
     print(wordlist)
     # remove duplicate & print to text file
 
-    output = open("data.txt", "w")
+    output = open(dataText, "w")
     c = Counter(wordlist)
     a = list(c.values())
     b = list(c.keys())

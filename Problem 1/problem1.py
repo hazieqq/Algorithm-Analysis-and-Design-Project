@@ -1,5 +1,6 @@
 import gmplot
 import requests
+import os
 
 # coordinates of courier companies
 cityLinkHub = (3.0319924887507144, 101.37344116244806)
@@ -155,5 +156,7 @@ gmap.directions(chosenCourier[1], cust2Dest)
 gmap.directions(cust3Ori, chosenCourier[2])
 gmap.directions(chosenCourier[2], cust3Dest)
 
-
-gmap.draw('map.html')
+savePath = 'Problem 1'
+fileName = 'map.html'
+mapHtml = os.path.join(savePath, fileName)
+gmap.draw(mapHtml)

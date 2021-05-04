@@ -1,5 +1,6 @@
 import pandas as pd
 import plotly.express as px
+import os
 
 
 def textToCSV(textFile, csvFile):
@@ -16,7 +17,10 @@ def createGraph(csvFile):
     fig.show()
 
 
-textFile = 'freqNeg.txt'
-csvFile = 'freqNeg.csv'
+savePath = 'Problem 2\J&T\Article 1'
+fileName1 = 'freqNeg.txt'
+fileName2 = 'freqNeg.csv'
+textFile = os.path.join(savePath, fileName1)
+csvFile = os.path.join(savePath, fileName2)
 textToCSV(textFile, csvFile)
 createGraph(csvFile)
