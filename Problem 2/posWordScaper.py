@@ -40,6 +40,7 @@ def readSampleText():
     text = file1.read()
     text = text.lower()
     text = re.findall(r'[\w]+', text)
+    file1.close()
     return text
 
 
@@ -60,11 +61,14 @@ def readOutputPositive(fileName2):
     file2 = open(fileName2, 'r')
     text = file2.read()
     text = text.split()
+    file2.close()
     return text
 
 
-def writefreqPos(text1, text2):
+def writeFreqPos(text1, text2):
     index = 0
+    sum = 0
+
     writeFile = open('freqPos.txt', 'w')
     for i in range(len(text2)):
         for j in range(len(text1)):
@@ -72,7 +76,16 @@ def writefreqPos(text1, text2):
                 index += 1
         print('{},{}'.format(text2[i], index))
         writeFile.write('{},{}'.format(text2[i], index)+"\n")
+        sum += index
         index = 0
+
+    writeFile.close()
+    return sum
+
+
+def writeTotalPos(sum):
+    with open('totalPosNeg.txt', 'w') as file:
+        file.write('{},{}'.format('Positive Words', sum)+"\n")
 
 
 try:
@@ -90,7 +103,8 @@ try:
     fileName2 = 'OutputPositive.txt'
     outputPositive(fileName1, fileName2)
     text2 = readOutputPositive(fileName2)
-    writefreqPos(text1, text2)
+    sum = writeFreqPos(text1, text2)
+    writeTotalPos(sum)
 
 except FileNotFoundError:
     print("file not found")

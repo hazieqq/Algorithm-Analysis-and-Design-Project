@@ -17,14 +17,14 @@ def webScrape(driver, URL, fileName):
     text_file.close()
 
 
-def readPositiveFile(fileName):
+def readNegativeFile(fileName):
     file = open(fileName, 'r')
     text = file.read()
     file.close()
     return text
 
 
-def writePositiveFile(text):
+def writeNegativeFile(text):
     text = re.sub("[(,){}<>:.[']", '', text)
     text = text.replace(",  ", '')
     text = re.sub("\s\s+", "\n", text)
@@ -40,10 +40,11 @@ def readSampleText():
     text = file1.read()
     text = text.lower()
     text = re.findall(r'[\w]+', text)
+    file1.close()
     return text
 
 
-def outputPositive(fileName1, fileName2):
+def outputNegative(fileName1, fileName2):
     # compare two files, if same output put into another file
     # (txt file website yang kita scrape with scraped negative file)
     with open('update_news.txt', 'r') as file1:
@@ -56,15 +57,18 @@ def outputPositive(fileName1, fileName2):
             file_out.write(line)
 
 
-def readOutputPositive(fileName2):
+def readOutputNegative(fileName2):
     file2 = open(fileName2, 'r')
     text = file2.read()
     text = text.split()
+    file2.close()
     return text
 
 
-def writefreqPos(text1, text2):
+def writeFreqNeg(text1, text2):
     index = 0
+    sum = 0
+
     writeFile = open('freqNeg.txt', 'w')
     for i in range(len(text2)):
         for j in range(len(text1)):
@@ -72,7 +76,16 @@ def writefreqPos(text1, text2):
                 index += 1
         print('{},{}'.format(text2[i], index))
         writeFile.write('{},{}'.format(text2[i], index)+"\n")
+        sum += index
         index = 0
+
+    writeFile.close()
+    return sum
+
+
+def writeTotalNeg(sum):
+    with open('totalPosNeg.txt', 'a') as file:
+        file.write('{},{}'.format('Negative Words', sum)+"\n")
 
 
 try:
@@ -83,14 +96,15 @@ try:
     fileName1 = 'negativeWord.txt'
     webScrape(driver, URL, fileName1)
 
-    text = readPositiveFile(fileName1)
-    writePositiveFile(text)
+    text = readNegativeFile(fileName1)
+    writeNegativeFile(text)
     text1 = readSampleText()
 
     fileName2 = 'OutputNegative.txt'
-    outputPositive(fileName1, fileName2)
-    text2 = readOutputPositive(fileName2)
-    writefreqPos(text1, text2)
+    outputNegative(fileName1, fileName2)
+    text2 = readOutputNegative(fileName2)
+    sum = writeFreqNeg(text1, text2)
+    writeTotalNeg(sum)
 
 except FileNotFoundError:
     print("file not found")
