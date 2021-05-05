@@ -105,7 +105,7 @@ try:
     URL = "https://positivewordsresearch.com/list-of-negative-words/"
     driver = webdriver.Chrome(PATH)
 
-    savePath = 'Problem 2\J&T\Article 1'
+    savePath = 'Problem 2\DHL\Article 1'
     fileName1 = 'negativeWord.txt'
     negWordText = os.path.join(savePath, fileName1)
     webScrape(driver, URL, negWordText)
@@ -117,6 +117,7 @@ try:
     fileName2 = 'OutputNegative.txt'
     outNegText = os.path.join(savePath, fileName2)
     outputNegative(negWordText, outNegText, savePath)
+    # output tak jadi, sorang tolong debug
     text2 = readOutputNegative(outNegText)
     sum = writeFreqNeg(text1, text2, savePath)
     writeTotalNeg(sum, savePath)

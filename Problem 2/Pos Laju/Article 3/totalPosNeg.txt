@@ -1,0 +1,2 @@
+Positive Words,4
+Negative Words,6

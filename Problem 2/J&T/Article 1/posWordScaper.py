@@ -35,8 +35,7 @@ def writePositiveFile(text, fileName):
     File.close()
 
 
-def readSampleText():
-    savePath = 'Problem 2\J&T\Article 1'
+def readSampleText(savePath):
     fileName1 = 'sample.txt'
     sampleText = os.path.join(savePath, fileName1)
 
@@ -48,10 +47,9 @@ def readSampleText():
     return text
 
 
-def outputPositive(fileName1, fileName2):
+def outputPositive(fileName1, fileName2, savePath):
     # compare two files, if same output put into another file
     # (txt file website yang kita scrape with scraped positive file)
-    savePath = 'Problem 2\J&T\Article 1'
     fileName = 'update_news.txt'
     upNewsText = os.path.join(savePath, fileName)
 
@@ -73,11 +71,10 @@ def readOutputPositive(fileName2):
     return text
 
 
-def writeFreqPos(text1, text2):
+def writeFreqPos(text1, text2, savePath):
     index = 0
     sum = 0
 
-    savePath = 'Problem 2\J&T\Article 1'
     fileName = 'freqPos.txt'
     freqPosText = os.path.join(savePath, fileName)
 
@@ -95,8 +92,7 @@ def writeFreqPos(text1, text2):
     return sum
 
 
-def writeTotalPos(sum):
-    savePath = 'Problem 2\J&T\Article 1'
+def writeTotalPos(sum, savePath):
     fileName = 'totalPosNeg.txt'
     totalPosNegText = os.path.join(savePath, fileName)
 
@@ -116,14 +112,16 @@ try:
 
     text = readPositiveFile(posWordText)
     writePositiveFile(text, posWordText)
-    text1 = readSampleText()
+    text1 = readSampleText(savePath)
 
     fileName2 = 'OutputPositive.txt'
     outPosText = os.path.join(savePath, fileName2)
-    outputPositive(posWordText, outPosText)
+    outputPositive(posWordText, outPosText, savePath)
     text2 = readOutputPositive(outPosText)
-    sum = writeFreqPos(text1, text2)
-    writeTotalPos(sum)
+    sum = writeFreqPos(text1, text2, savePath)
+    writeTotalPos(sum, savePath)
+
+    driver.close()
 
 except FileNotFoundError:
     print("file not found")
