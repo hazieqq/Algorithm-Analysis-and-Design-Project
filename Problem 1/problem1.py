@@ -1,82 +1,91 @@
 import gmplot
 import requests
-import os
+from map_styles import style
+from dijikstra import Graph
 
 # coordinates of courier companies
-cityLinkHub = (3.0319924887507144, 101.37344116244806)
-posLajuHub = (3.112924170027219, 101.63982650389863)
-gdexHub = (3.265154613796736, 101.68024844550233)
-jntHub = (2.9441205329488325, 101.7901521759029)
-dhlHub = (3.2127230893650065, 101.57467295692778)
+CitylinkExpress = (3.0319924887507144, 101.37344116244806)
+PosLaju = (3.112924170027219, 101.63982650389863)
+GDEX = (3.265154613796736, 101.68024844550233)
+JT = (2.9441205329488325, 101.7901521759029)
+DHL = (3.2127230893650065, 101.57467295692778)
 
-# coordinates of customers
-cust1Ori = (3.3615395462207878, 101.56318183511695)
-cust1Dest = (3.1000170516638885, 101.53071480907951)
-cust2Ori = (3.049398375759954, 101.58546611160301)
-cust2Dest = (3.227994355250716, 101.42730357605375)
-cust3Ori = (3.141855957281073, 101.76158583424586)
-cust3Dest = (2.9188704151716256, 101.65251821655471)
+colorCode = ("red","purple","blue")
+
+n = int(input("Enter number of customer: "))
+customerOriLats =[]
+customerOriLngs =[]
+customerDestLats =[]
+customerDestLngs =[]
+
+for i in range(0,n):
+    print('Enter origin latitudes for customer ',end=': '+'\n')
+    custOriLats = float(input())
+    print('Enter origin longitudes for customer ',end=': '+'\n')
+    custOriLngs = float(input())
+    print('Enter destination latitudes for customer ',end=': '+'\n')
+    custDestLats = float(input())
+    print('Enter destination longitudes for customer ',end=': '+'\n')
+    custDestLngs = float(input())
+    
+    customerOriLats.append(custOriLats)
+    customerOriLngs.append(custOriLngs)
+    customerDestLats.append(custDestLats)
+    customerDestLngs.append(custDestLngs)
+
 
 courierCoorLats, courierCoorLangs = zip(
-    *[cityLinkHub, posLajuHub, gdexHub, jntHub, dhlHub])
+    *[CitylinkExpress, PosLaju, GDEX, JT, DHL])
 
-courierNames = ['City-link Express', 'Pos Laju', 'GDEX', 'J&T', 'DHL']
+courierNames = ['City-link Express', 'Pos Laju', 'GDEX', 'JT', 'DHL']
 
 
-customer_ori_lats, customer_ori_lngs = zip(*[cust1Ori, cust2Ori, cust3Ori])
-customer_dest_lats, customer_dest_lngs = zip(
-    *[cust1Dest, cust2Dest, cust3Dest])
 
-distCust1BefPath = zip(*[cust1Ori, cust1Dest])
-distCust2BefPath = zip(*[cust2Ori, cust2Dest])
-distCust3BefPath = zip(*[cust3Ori, cust3Dest])
+
 
 chosenCourier = []
 
 
-def markLocation(gmap, courierCoorLats, courierCoorLangs,
-                 cust1Ori, cust1Dest, cust2Ori, cust2Dest, cust3Ori, cust3Dest):
+def markLocation(gmap, courierCoorLats, courierCoorLangs,colorCode):
 
     for i in range(5):
         gmap.marker(courierCoorLats[i], courierCoorLangs[i],
-                    color='cornflowerblue')
+                    color='cornflowerblue',info_window=courierNames[i])
 
-    # customer 1
-    gmap.marker(cust1Ori[0], cust1Ori[1], color='red')
-    gmap.marker(cust1Dest[0], cust1Dest[1], color='red')
+    for i in range(0,n):
+        gmap.marker(customerOriLats[i], customerOriLngs[i], color=colorCode[i])
+        gmap.marker(customerDestLats[i], customerDestLngs[i], color=colorCode[i])
+    
+    
 
-    # customer 2
-    gmap.marker(cust2Ori[0], cust2Ori[1], color='purple')
-    gmap.marker(cust2Dest[0], cust2Dest[1], color='purple')
+def printBeforeDistance(customerOrilats, customerOriLngs,
+                        customerDestlats, customerDestLngs):
 
-    # customer 3
-    gmap.marker(cust3Ori[0], cust3Ori[1], color='blue')
-    gmap.marker(cust3Dest[0], cust3Dest[1], color='blue')
-
-
-def printBeforeDistance(customer_ori_lats, customer_ori_lngs,
-                        customer_dest_lats, customer_dest_lngs):
-
-    for i in range(3):
-        stick1 = str(customer_ori_lats[i]) + "," + str(customer_ori_lngs[i])
-        stick2 = str(customer_dest_lats[i]) + "," + str(customer_dest_lngs[i])
+    for i in range(0,n):
+        
+        stick1 = str(customerOriLats[i]) + "," + str(customerOriLngs[i])
+        stick2 = str(customerDestLats[i]) + "," + str(customerDestLngs[i])
         url = ("https://maps.googleapis.com/maps/api/distancematrix/json?units=km&origins="
                + stick1 + "&destinations=" + stick2 + "&key=" + apikey)
         output = requests.get(url).json()
         print('Distance for Customer', i+1, '(Before):',
               output["rows"][0]["elements"][0]["distance"]["text"])
 
-
+dis =[]
+dis1=[]
 def printAfterDistance(customer_ori_lats, customer_ori_lngs,
                        customer_dest_lats, customer_dest_lngs,
                        courierCoorLats, courierCoorLangs, courierNames,):
-
-    for i in range(3):
-        stick1 = str(customer_ori_lats[i]) + "," + str(customer_ori_lngs[i])
-        stick2 = str(customer_dest_lats[i]) + "," + str(customer_dest_lngs[i])
+    
+    for i in range(0,n):
+       
+        stick1 = str(customerOriLats[i]) + "," + str(customerOriLngs[i])
+        stick2 = str(customerDestLats[i]) + "," + str(customerDestLngs[i])
         distance = []
+        g = Graph("",[])
         courierNames = ['City-link Express', 'Pos Laju', 'GDEX', 'J&T', 'DHL']
         for j in range(5):
+            
             stick3 = str(courierCoorLats[j]) + "," + str(courierCoorLangs[j])
             urlOriginToHub = ("https://maps.googleapis.com/maps/api/distancematrix/json?units=km&origins="
                               + stick1 + "&destinations=" + stick3 + "&key=" + apikey)
@@ -90,73 +99,75 @@ def printAfterDistance(customer_ori_lats, customer_ori_lngs,
                 outputHubToDest["rows"][0]["elements"][0]["distance"]["text"])
             distance.append((float(distanceOriginToHub.split()[
                             0])) + float(distanceHubToDest.split()[0]))
+            dis.append((float(distanceOriginToHub.split()[0])))
+            dis1.append(float(distanceHubToDest.split()[0]))
+        graph = [[0,dis[0],0,dis[1],dis[2],dis[3],dis[4]],
+                [dis[0],0,dis1[0],0,0,0,0],
+                [0,dis1[0],0,dis1[1],dis1[2],dis1[3],dis1[4]],
+                [dis[1],0,dis1[1],0,0,0,0],
+                [dis[2],0,dis1[2],0,0,0,0],
+                [dis[3],0,dis1[3],0,0,0,0],
+                [dis[4],0,dis1[4],0,0,0,0]]  
+        courier = g.dijkstra(graph,0)
+        dis.clear()
+        dis1.clear()  
+        # for k in range(len(courierNames)):
+        #     for j in range(1, len(courierNames)):
+        #         if distance[k] > distance[j]:
+        #             temp = distance[j]
+        #             distance[j] = distance[k]
+        #             distance[k] = temp
 
-        for k in range(len(courierNames)):
-            for j in range(1, len(courierNames)):
-                if distance[k] > distance[j]:
-                    temp = distance[j]
-                    distance[j] = distance[k]
-                    distance[k] = temp
+        #             temp1 = courierNames[j]
+        #             courierNames[j] = courierNames[k]
+        #             courierNames[k] = temp1
+        #     break
+        courier1=None
+        if(int(str(courier[1])[1])==1):
+            courier1=0
+        else:
+            courier1=int(str(courier[1])[1])-2
 
-                    temp1 = courierNames[j]
-                    courierNames[j] = courierNames[k]
-                    courierNames[k] = temp1
-            break
-
-        print('Closest courier hub to Customer', i+1, ':', courierNames[0])
-        print('Distance for Customer', i+1, '(After):', distance[0], 'km')
-
-        if courierNames[0] == 'City-link Express':
-            chosenCourier.append(cityLinkHub)
-        elif courierNames[0] == 'Pos Laju':
-            chosenCourier.append(posLajuHub)
-
-        elif courierNames[0] == 'GDEX':
-            chosenCourier.append(gdexHub)
-
-        elif courierNames[0] == 'J&T':
-            chosenCourier.append(jntHub)
-
-        elif courierNames[0] == 'DHL':
-            chosenCourier.append(dhlHub)
+        print('Closest courier hub to Customer', i+1, ':', courierNames[courier1])
+        print('Distance for Customer', i+1, '(After):', courier[0], 'km')
+        chosenCourier.append(int(courier1))
 
 
-apikey = 'AIzaSyALoQuHQws1uow3VCluraRw97xWY3dqKnI'
-gmap = gmplot.GoogleMapPlotter(4.2105, 101.9758, 14, apikey=apikey)
-
+apikey = 'AIzaSyCz9ZuEqAI4Sbg0G-F91etEvlhIt1Le0d0'
+gmap = gmplot.GoogleMapPlotter(4.2105, 101.9758, 14, apikey=apikey, map_styles=style())
 # question 1
-markLocation(gmap, courierCoorLats, courierCoorLangs,
-             cust1Ori, cust1Dest, cust2Ori, cust2Dest, cust3Ori, cust3Dest)
+markLocation(gmap, courierCoorLats, courierCoorLangs,colorCode)
 
 # question 2
-printBeforeDistance(customer_ori_lats, customer_ori_lngs,
-                    customer_dest_lats, customer_dest_lngs)
-print()
+printBeforeDistance(customerOriLats, customerOriLngs,
+                    customerDestLats, customerDestLngs)
+# print()
 
 # question 3
-printAfterDistance(customer_ori_lats, customer_ori_lngs,
-                   customer_dest_lats, customer_dest_lngs,
-                   courierCoorLats, courierCoorLangs, courierNames,)
+printAfterDistance(customerOriLats, customerOriLngs,
+                   customerDestLats, customerDestLngs,
+                   courierCoorLats, courierCoorLangs, courierNames)
 
 # question 4
 # gmap.plot(*distCust1BefPath, edge_width=7, color='red')
 # gmap.plot(*distCust2BefPath, edge_width=7, color='purple')
 # gmap.plot(*distCust3BefPath, edge_width=7, color='blue')
-gmap.directions(cust1Ori, cust1Dest)
-gmap.directions(cust2Ori, cust2Dest)
-gmap.directions(cust3Ori, cust3Dest)
+
+# for i in range(0,n):
+#     custZip = (customerOriLats[i],customerOriLngs[i])
+#     custDestZip = (customerDestLats[i],customerDestLngs[i])
+#     gmap.directions(custZip, custDestZip)
 
 # after algo
-gmap.directions(cust1Ori, chosenCourier[0])
-gmap.directions(chosenCourier[0], cust1Dest)
-
-gmap.directions(cust2Ori, chosenCourier[1])
-gmap.directions(chosenCourier[1], cust2Dest)
-
-gmap.directions(cust3Ori, chosenCourier[2])
-gmap.directions(chosenCourier[2], cust3Dest)
-
-savePath = 'Problem 1'
-fileName = 'map.html'
-mapHtml = os.path.join(savePath, fileName)
-gmap.draw(mapHtml)
+for i in range(0,n):
+  custZip = (customerOriLats[i],customerOriLngs[i])
+  custDestZip = (customerDestLats[i],customerDestLngs[i])
+  # gmap.directions(custZip, chosenCourier[i])
+  gmap.directions(
+      (customerOriLats[i],customerOriLngs[i]),
+      (customerDestLats[i],customerDestLngs[i]),
+      waypoints=[
+          (courierCoorLats[chosenCourier[i]],courierCoorLangs[chosenCourier[i]])
+      ]
+  )
+gmap.draw('map.html')

@@ -3,10 +3,171 @@
 <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
 <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
 <title>Google Maps - gmplot</title>
-<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?libraries=visualization&key=AIzaSyALoQuHQws1uow3VCluraRw97xWY3dqKnI"></script>
+<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?libraries=visualization&key=AIzaSyCz9ZuEqAI4Sbg0G-F91etEvlhIt1Le0d0"></script>
 <script type="text/javascript">
     function initialize() {
         var map = new google.maps.Map(document.getElementById("map_canvas"), {
+            styles: [
+                {
+                    "elementType": "geometry",
+                    "stylers": [
+                        {
+                            "color": "#242f3e"
+                        }
+                    ]
+                },
+                {
+                    "elementType": "labels.text.stroke",
+                    "stylers": [
+                        {
+                            "color": "#242f3e"
+                        }
+                    ]
+                },
+                {
+                    "elementType": "labels.text.fill",
+                    "stylers": [
+                        {
+                            "color": "#746855"
+                        }
+                    ]
+                },
+                {
+                    "featureType": "administrative.locality",
+                    "elementType": "labels.text.fill",
+                    "stylers": [
+                        {
+                            "color": "#d59563"
+                        }
+                    ]
+                },
+                {
+                    "featureType": "poi",
+                    "elementType": "labels.text.fill",
+                    "stylers": [
+                        {
+                            "color": "#d59563"
+                        }
+                    ]
+                },
+                {
+                    "featureType": "poi.park",
+                    "elementType": "geometry",
+                    "stylers": [
+                        {
+                            "color": "#263c3f"
+                        }
+                    ]
+                },
+                {
+                    "featureType": "poi.park",
+                    "elementType": "labels.text.fill",
+                    "stylers": [
+                        {
+                            "color": "#6b9a76"
+                        }
+                    ]
+                },
+                {
+                    "featureType": "road",
+                    "elementType": "geometry",
+                    "stylers": [
+                        {
+                            "color": "#38414e"
+                        }
+                    ]
+                },
+                {
+                    "featureType": "road",
+                    "elementType": "geometry.stroke",
+                    "stylers": [
+                        {
+                            "color": "#212a37"
+                        }
+                    ]
+                },
+                {
+                    "featureType": "road",
+                    "elementType": "labels.text.fill",
+                    "stylers": [
+                        {
+                            "color": "#9ca5b3"
+                        }
+                    ]
+                },
+                {
+                    "featureType": "road.highway",
+                    "elementType": "geometry",
+                    "stylers": [
+                        {
+                            "color": "#746855"
+                        }
+                    ]
+                },
+                {
+                    "featureType": "road.highway",
+                    "elementType": "geometry.stroke",
+                    "stylers": [
+                        {
+                            "color": "#1f2835"
+                        }
+                    ]
+                },
+                {
+                    "featureType": "road.highway",
+                    "elementType": "labels.text.fill",
+                    "stylers": [
+                        {
+                            "color": "#f3d19c"
+                        }
+                    ]
+                },
+                {
+                    "featureType": "transit",
+                    "elementType": "geometry",
+                    "stylers": [
+                        {
+                            "color": "#2f3948"
+                        }
+                    ]
+                },
+                {
+                    "featureType": "transit.station",
+                    "elementType": "labels.text.fill",
+                    "stylers": [
+                        {
+                            "color": "#d59563"
+                        }
+                    ]
+                },
+                {
+                    "featureType": "water",
+                    "elementType": "geometry",
+                    "stylers": [
+                        {
+                            "color": "#17263c"
+                        }
+                    ]
+                },
+                {
+                    "featureType": "water",
+                    "elementType": "labels.text.fill",
+                    "stylers": [
+                        {
+                            "color": "#515c6d"
+                        }
+                    ]
+                },
+                {
+                    "featureType": "water",
+                    "elementType": "labels.text.stroke",
+                    "stylers": [
+                        {
+                            "color": "#17263c"
+                        }
+                    ]
+                }
+            ],
             zoom: 14,
             center: new google.maps.LatLng(4.210500, 101.975800)
         });
@@ -16,34 +177,74 @@
             labelOrigin: new google.maps.Point(10, 11)
         };
 
-        new google.maps.Marker({
+        var info_marker_0 = new google.maps.Marker({
             position: new google.maps.LatLng(3.031992, 101.373441),
             icon: marker_icon_6495ED,
             map: map
         });
 
-        new google.maps.Marker({
+        var info_window_0 = new google.maps.InfoWindow({
+            content: 'City-link Express'
+        });
+        
+        info_marker_0.addListener('click', function() {
+            info_window_0.open(map, info_marker_0);
+        });
+
+        var info_marker_1 = new google.maps.Marker({
             position: new google.maps.LatLng(3.112924, 101.639827),
             icon: marker_icon_6495ED,
             map: map
         });
 
-        new google.maps.Marker({
+        var info_window_1 = new google.maps.InfoWindow({
+            content: 'Pos Laju'
+        });
+        
+        info_marker_1.addListener('click', function() {
+            info_window_1.open(map, info_marker_1);
+        });
+
+        var info_marker_2 = new google.maps.Marker({
             position: new google.maps.LatLng(3.265155, 101.680248),
             icon: marker_icon_6495ED,
             map: map
         });
 
-        new google.maps.Marker({
+        var info_window_2 = new google.maps.InfoWindow({
+            content: 'GDEX'
+        });
+        
+        info_marker_2.addListener('click', function() {
+            info_window_2.open(map, info_marker_2);
+        });
+
+        var info_marker_3 = new google.maps.Marker({
             position: new google.maps.LatLng(2.944121, 101.790152),
             icon: marker_icon_6495ED,
             map: map
         });
 
-        new google.maps.Marker({
+        var info_window_3 = new google.maps.InfoWindow({
+            content: 'JT'
+        });
+        
+        info_marker_3.addListener('click', function() {
+            info_window_3.open(map, info_marker_3);
+        });
+
+        var info_marker_4 = new google.maps.Marker({
             position: new google.maps.LatLng(3.212723, 101.574673),
             icon: marker_icon_6495ED,
             map: map
+        });
+
+        var info_window_4 = new google.maps.InfoWindow({
+            content: 'DHL'
+        });
+        
+        info_marker_4.addListener('click', function() {
+            info_window_4.open(map, info_marker_4);
         });
 
         var marker_icon_FF0000 = {
@@ -100,6 +301,9 @@
         new google.maps.DirectionsService().route({
             origin: new google.maps.LatLng(3.361540, 101.563182),
             destination: new google.maps.LatLng(3.100017, 101.530715),
+            waypoints: [
+                {location: new google.maps.LatLng(3.212723, 101.574673), stopover: false},
+            ],
             travelMode: "DRIVING"
         }, function(response, status) {
             if (status == google.maps.DirectionsStatus.OK) {
@@ -110,6 +314,9 @@
         new google.maps.DirectionsService().route({
             origin: new google.maps.LatLng(3.049398, 101.585466),
             destination: new google.maps.LatLng(3.227994, 101.427304),
+            waypoints: [
+                {location: new google.maps.LatLng(3.212723, 101.574673), stopover: false},
+            ],
             travelMode: "DRIVING"
         }, function(response, status) {
             if (status == google.maps.DirectionsStatus.OK) {
@@ -120,66 +327,9 @@
         new google.maps.DirectionsService().route({
             origin: new google.maps.LatLng(3.141856, 101.761586),
             destination: new google.maps.LatLng(2.918870, 101.652518),
-            travelMode: "DRIVING"
-        }, function(response, status) {
-            if (status == google.maps.DirectionsStatus.OK) {
-                new google.maps.DirectionsRenderer({map: map}).setDirections(response);
-            }
-        });
-
-        new google.maps.DirectionsService().route({
-            origin: new google.maps.LatLng(3.361540, 101.563182),
-            destination: new google.maps.LatLng(3.212723, 101.574673),
-            travelMode: "DRIVING"
-        }, function(response, status) {
-            if (status == google.maps.DirectionsStatus.OK) {
-                new google.maps.DirectionsRenderer({map: map}).setDirections(response);
-            }
-        });
-
-        new google.maps.DirectionsService().route({
-            origin: new google.maps.LatLng(3.212723, 101.574673),
-            destination: new google.maps.LatLng(3.100017, 101.530715),
-            travelMode: "DRIVING"
-        }, function(response, status) {
-            if (status == google.maps.DirectionsStatus.OK) {
-                new google.maps.DirectionsRenderer({map: map}).setDirections(response);
-            }
-        });
-
-        new google.maps.DirectionsService().route({
-            origin: new google.maps.LatLng(3.049398, 101.585466),
-            destination: new google.maps.LatLng(3.212723, 101.574673),
-            travelMode: "DRIVING"
-        }, function(response, status) {
-            if (status == google.maps.DirectionsStatus.OK) {
-                new google.maps.DirectionsRenderer({map: map}).setDirections(response);
-            }
-        });
-
-        new google.maps.DirectionsService().route({
-            origin: new google.maps.LatLng(3.212723, 101.574673),
-            destination: new google.maps.LatLng(3.227994, 101.427304),
-            travelMode: "DRIVING"
-        }, function(response, status) {
-            if (status == google.maps.DirectionsStatus.OK) {
-                new google.maps.DirectionsRenderer({map: map}).setDirections(response);
-            }
-        });
-
-        new google.maps.DirectionsService().route({
-            origin: new google.maps.LatLng(3.141856, 101.761586),
-            destination: new google.maps.LatLng(2.944121, 101.790152),
-            travelMode: "DRIVING"
-        }, function(response, status) {
-            if (status == google.maps.DirectionsStatus.OK) {
-                new google.maps.DirectionsRenderer({map: map}).setDirections(response);
-            }
-        });
-
-        new google.maps.DirectionsService().route({
-            origin: new google.maps.LatLng(2.944121, 101.790152),
-            destination: new google.maps.LatLng(2.918870, 101.652518),
+            waypoints: [
+                {location: new google.maps.LatLng(2.944121, 101.790152), stopover: false},
+            ],
             travelMode: "DRIVING"
         }, function(response, status) {
             if (status == google.maps.DirectionsStatus.OK) {
