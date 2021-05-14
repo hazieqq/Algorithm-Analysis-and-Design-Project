@@ -1,0 +1,2 @@
+Positive Words,0
+Negative Words,0

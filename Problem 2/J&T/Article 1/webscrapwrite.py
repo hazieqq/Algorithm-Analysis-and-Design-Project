@@ -1,8 +1,17 @@
+from io import IncrementalNewlineDecoder
 from selenium import webdriver
 from bs4 import BeautifulSoup
 from collections import Counter
 import re
 import os
+from swprogram import excludeStopw
+from posWordScraper import positive
+from negWordScraper import negative
+from posWordGraph import posGraph
+from negWordGraph import negGraph
+from posNegWordGraph import PosNegGraph
+from wordCountGraph import CountGraph
+
 #5 (a)
 try:
     PATH = "Problem 2\chromedriver.exe"
@@ -33,7 +42,8 @@ try:
     wordstring = wordstring.lower()
     wordstring = wordstring.replace('"', "")
     wordlist = re.findall(r"[\w&']+", wordstring)
-    print(wordlist)
+    #print(wordlist)
+    
     # remove duplicate & print to text file
 
     output = open(dataText, "w")
@@ -47,5 +57,14 @@ try:
     output.close()
     text_file.close()
     driver.close()
+
+    excludeStopw()
+    positive()
+    negative()
+    posGraph()
+    negGraph()
+    PosNegGraph()
+    CountGraph()
+
 except FileNotFoundError:
     print("file not found")

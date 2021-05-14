@@ -1,0 +1,10 @@
+damaged,3
+mishandle,1
+violent,1
+complaints,1
+issue,1
+denied,1
+lost,1
+prejudice,1
+misunderstanding,1
+fault,1
