@@ -83,7 +83,7 @@ def writeFreqNeg(text1, text2, savePath):
         for j in range(len(text1)):
             if text1[j] == text2[i]:
                 index += 1
-        print('{},{}'.format(text2[i], index))
+        #print('{},{}'.format(text2[i], index))
         writeFile.write('{},{}'.format(text2[i], index)+"\n")
         sum += index
         index = 0
@@ -99,30 +99,30 @@ def writeTotalNeg(sum, savePath):
     with open(totalPosNegText, 'a') as file:
         file.write('{},{}'.format('Negative Words', sum)+"\n")
 
+def negative():
+    try:
+        # PATH = "Problem 2\chromedriver.exe"
+        # URL = "https://positivewordsresearch.com/list-of-negative-words/"
+        # driver = webdriver.Chrome(PATH)
 
-try:
-    PATH = "Problem 2\chromedriver.exe"
-    URL = "https://positivewordsresearch.com/list-of-negative-words/"
-    driver = webdriver.Chrome(PATH)
+        savePath = 'Problem 2\Pos Laju\Article 2'
+        fileName1 = 'negativeWord.txt'
+        negWordText = os.path.join(savePath, fileName1)
+        # webScrape(driver, URL, negWordText)
 
-    savePath = 'Problem 2\Pos Laju\Article 2'
-    fileName1 = 'negativeWord.txt'
-    negWordText = os.path.join(savePath, fileName1)
-    webScrape(driver, URL, negWordText)
+        # text = readNegativeFile(negWordText)
+        # writeNegativeFile(text, negWordText)
+        text1 = readSampleText(savePath)
 
-    text = readNegativeFile(negWordText)
-    writeNegativeFile(text, negWordText)
-    text1 = readSampleText(savePath)
+        fileName2 = 'OutputNegative.txt'
+        outNegText = os.path.join(savePath, fileName2)
+        outputNegative(negWordText, outNegText, savePath)
+        text2 = readOutputNegative(outNegText)
+    
+        sum = writeFreqNeg(text1, text2, savePath)
+        writeTotalNeg(sum, savePath)
 
-    fileName2 = 'OutputNegative.txt'
-    outNegText = os.path.join(savePath, fileName2)
-    outputNegative(negWordText, outNegText, savePath)
-    # output tak jadi, sorang tolong debug
-    text2 = readOutputNegative(outNegText)
-    sum = writeFreqNeg(text1, text2, savePath)
-    writeTotalNeg(sum, savePath)
+        # driver.close()
 
-    driver.close()
-
-except FileNotFoundError:
-    print("file not found")
+    except FileNotFoundError:
+        print("file not found")

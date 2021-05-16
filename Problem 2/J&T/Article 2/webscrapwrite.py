@@ -4,13 +4,20 @@ from bs4 import BeautifulSoup
 from collections import Counter
 import re
 import os
-from swprogram import excludeStopw
-from posWordScraper import positive
-from negWordScraper import negative
-from posWordGraph import posGraph
-from negWordGraph import negGraph
-from posNegWordGraph import PosNegGraph
-from wordCountGraph import CountGraph
+# from swprogram import excludeStopw
+# from posWordScraper import positive
+# from negWordScraper import negative
+# from posWordGraph import posGraph
+# from negWordGraph import negGraph
+# from posNegWordGraph import PosNegGraph
+# from wordCountGraph import CountGraph
+from swprogram import *
+from posWordScraper import *
+from negWordScraper import *
+from posWordGraph import *
+from negWordGraph import *
+from posNegWordGraph import *
+from wordCountGraph import *
 
 #5 (a)
 try:
