@@ -105,7 +105,7 @@ try:
     URL = "http://positivewordsresearch.com/list-of-positive-words/"
     driver = webdriver.Chrome(PATH)
 
-    savePath = 'Problem 2\DHL\Article 1'
+    savePath = 'Problem 2\J&T\Article 1'
     fileName1 = 'positiveWord.txt'
     posWordText = os.path.join(savePath, fileName1)
     webScrape(driver, URL, posWordText)
@@ -120,7 +120,7 @@ try:
     text2 = readOutputPositive(outPosText)
     sum = writeFreqPos(text1, text2, savePath)
     writeTotalPos(sum, savePath)
-    
+
     driver.close()
 
 except FileNotFoundError:

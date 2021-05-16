@@ -16,11 +16,15 @@ def createGraph(csvFile):
     fig.update_layout(uniformtext_minsize=8, uniformtext_mode='hide')
     fig.show()
 
+#run
+def posGraph():
+    savePath = 'Problem 2\DHL\Article 1'
+    fileName1 = 'freqPos.txt'
+    fileName2 = 'freqPos.csv'
+    textFile = os.path.join(savePath, fileName1)
+    csvFile = os.path.join(savePath, fileName2)
+    textToCSV(textFile, csvFile)
+    createGraph(csvFile)
 
-savePath = 'Problem 2\DHL\Article 1'
-fileName1 = 'freqPos.txt'
-fileName2 = 'freqPos.csv'
-textFile = os.path.join(savePath, fileName1)
-csvFile = os.path.join(savePath, fileName2)
-textToCSV(textFile, csvFile)
-createGraph(csvFile)
+
+

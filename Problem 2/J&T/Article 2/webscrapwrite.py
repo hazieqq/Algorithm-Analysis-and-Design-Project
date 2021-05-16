@@ -15,7 +15,7 @@ from wordCountGraph import CountGraph
 #5 (a)
 try:
     PATH = "Problem 2\chromedriver.exe"
-    URL = "https://www.malaymail.com/news/malaysia/2021/02/07/courier-company-jt-express-explains-staffs-violent-handling-of-parcels-caug/1947791"
+    URL = "https://www.nst.com.my/news/nation/2021/02/667583/dhl-express-delivers-first-batch-covid-19-vaccines-malaysia"
     driver = webdriver.Chrome(PATH)
     savePath = 'Problem 2\J&T\Article 2'
     fileName1 = "sample.txt"
@@ -30,7 +30,7 @@ try:
     page = driver.page_source
     page_soup = BeautifulSoup(page, 'html.parser')
     
-    article = page_soup.find('div', attrs={'class': 'col-12 col-md-7 col-lg-8 primary'})
+    article = page_soup.find('div', attrs={'class': 'field-item even'})
 
     for p in article.find_all('p'):
         n = text_file.write(p.text + "\n")

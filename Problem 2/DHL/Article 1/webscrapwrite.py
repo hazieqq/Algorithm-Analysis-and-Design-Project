@@ -1,12 +1,21 @@
+from io import IncrementalNewlineDecoder
 from selenium import webdriver
 from bs4 import BeautifulSoup
 from collections import Counter
 import re
 import os
+from swprogram import excludeStopw
+from posWordScraper import positive
+from negWordScraper import negative
+from posWordGraph import posGraph
+from negWordGraph import negGraph
+from posNegWordGraph import PosNegGraph
+from wordCountGraph import CountGraph
+
 #5 (a)
 try:
     PATH = "Problem 2\chromedriver.exe"
-    URL = "https://www.nst.com.my/news/nation/2021/02/667583/dhl-express-delivers-first-batch-covid-19-vaccines-malaysia"
+    URL = "https://www.theedgemarkets.com/article/tech-digitalisation-way-forward-dhl-express"
     driver = webdriver.Chrome(PATH)
     savePath = 'Problem 2\DHL\Article 1'
     fileName1 = "sample.txt"
@@ -21,7 +30,7 @@ try:
     page = driver.page_source
     page_soup = BeautifulSoup(page, 'html.parser')
 
-    article = page_soup.find('div', attrs={'class': 'field field-body'})
+    article = page_soup.find('div', attrs={'class': 'article_content'})
 
     for p in article.find_all('p'):
         n = text_file.write(p.text + "\n")
@@ -33,7 +42,8 @@ try:
     wordstring = wordstring.lower()
     wordstring = wordstring.replace('"', "")
     wordlist = re.findall(r"[\w&']+", wordstring)
-    print(wordlist)
+    #print(wordlist)
+    
     # remove duplicate & print to text file
 
     output = open(dataText, "w")
@@ -47,5 +57,14 @@ try:
     output.close()
     text_file.close()
     driver.close()
+
+    excludeStopw()
+    positive()
+    negative()
+    posGraph()
+    negGraph()
+    PosNegGraph()
+    CountGraph()
+
 except FileNotFoundError:
     print("file not found")
