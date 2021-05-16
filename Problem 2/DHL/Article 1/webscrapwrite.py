@@ -4,13 +4,18 @@ from bs4 import BeautifulSoup
 from collections import Counter
 import re
 import os
-from swprogram import excludeStopw
-from posWordScraper import positive
-from negWordScraper import negative
-from posWordGraph import posGraph
-from negWordGraph import negGraph
-from posNegWordGraph import PosNegGraph
-from wordCountGraph import CountGraph
+# from swprogram import excludeStopw
+# from posWordScraper import positive
+# from posWordScraper import  writeFreqPos
+# from posWordScraper import  readSampleText
+# from posWordScraper import  readOutputPositive
+from swprogram import *
+from posWordScraper import *
+from negWordScraper import *
+from posWordGraph import *
+from negWordGraph import *
+from posNegWordGraph import *
+from wordCountGraph import *
 
 #5 (a)
 try:
@@ -65,6 +70,15 @@ try:
     negGraph()
     PosNegGraph()
     CountGraph()
+
+    
+    # positivity = writeFreqPos( readSampleText(savePath) ,readOutputPositive(os.path.join(savePath, 'OutputPositive.txt')),savePath)
+    # negativity = writeFreqNeg( readSampleText(savePath) ,readOutputNegative(os.path.join(savePath, 'OutputNegative.txt')),savePath)
+
+    # print('sum',positivity)
+    # print('sum',negativity)
+    # print('sum',c)
+
 
 except FileNotFoundError:
     print("file not found")

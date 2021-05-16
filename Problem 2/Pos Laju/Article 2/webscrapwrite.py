@@ -1,8 +1,24 @@
+from io import IncrementalNewlineDecoder
 from selenium import webdriver
 from bs4 import BeautifulSoup
 from collections import Counter
 import re
 import os
+# from swprogram import excludeStopw
+# from posWordScraper import positive
+# from negWordScraper import negative
+# from posWordGraph import posGraph
+# from negWordGraph import negGraph
+# from posNegWordGraph import PosNegGraph
+# from wordCountGraph import CountGraph
+from swprogram import *
+from posWordScraper import *
+from negWordScraper import *
+from posWordGraph import *
+from negWordGraph import *
+from posNegWordGraph import *
+from wordCountGraph import *
+
 #5 (a)
 try:
     PATH = "Problem 2\chromedriver.exe"
@@ -16,11 +32,11 @@ try:
 
     driver.get(URL)
 
-    text_file = open(sampleText, "w")
+    text_file = open(sampleText, "w", encoding="cp437", errors='ignore')
 
     page = driver.page_source
     page_soup = BeautifulSoup(page, 'html.parser')
-
+    
     article = page_soup.find('div', attrs={'class': 'field field-body'})
 
     for p in article.find_all('p'):
@@ -33,7 +49,8 @@ try:
     wordstring = wordstring.lower()
     wordstring = wordstring.replace('"', "")
     wordlist = re.findall(r"[\w&']+", wordstring)
-    print(wordlist)
+    #print(wordlist)
+    
     # remove duplicate & print to text file
 
     output = open(dataText, "w")
@@ -47,5 +64,14 @@ try:
     output.close()
     text_file.close()
     driver.close()
+
+    excludeStopw()
+    positive()
+    negative()
+    posGraph()
+    negGraph()
+    PosNegGraph()
+    CountGraph()
+
 except FileNotFoundError:
     print("file not found")

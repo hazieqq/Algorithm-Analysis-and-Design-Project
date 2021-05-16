@@ -1,4 +1,5 @@
+restriction,1
+sap,1
+wasting,1
 delays,2
 issue,2
-sap,1
-restriction,1

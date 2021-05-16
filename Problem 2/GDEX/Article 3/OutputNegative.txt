@@ -1,4 +1,5 @@
+restriction
+sap
+wasting
 delays
 issue
-sap
-restriction

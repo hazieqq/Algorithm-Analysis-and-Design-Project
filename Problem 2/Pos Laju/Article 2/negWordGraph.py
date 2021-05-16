@@ -16,11 +16,13 @@ def createGraph(csvFile):
     fig.update_layout(uniformtext_minsize=8, uniformtext_mode='hide')
     fig.show()
 
+#run
+def negGraph():
+    savePath = 'Problem 2\Pos Laju\Article 2'
+    fileName1 = 'freqNeg.txt'
+    fileName2 = 'freqNeg.csv'
+    textFile = os.path.join(savePath, fileName1)
+    csvFile = os.path.join(savePath, fileName2)
+    textToCSV(textFile, csvFile)
+    createGraph(csvFile)
 
-savePath = 'Problem 2\Pos Laju\Article 2'
-fileName1 = 'freqNeg.txt'
-fileName2 = 'freqNeg.csv'
-textFile = os.path.join(savePath, fileName1)
-csvFile = os.path.join(savePath, fileName2)
-textToCSV(textFile, csvFile)
-createGraph(csvFile)
