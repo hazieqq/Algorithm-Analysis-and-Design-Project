@@ -20,8 +20,8 @@ def excludeStopw():
         wordstring = stop_word_file.read()
         wordlist = wordstring.split()
 
-        set1 = set(articlelist)
-        set2 = set(wordlist)
+        set1 = set(articlelist) #set of sample words
+        set2 = set(wordlist)    #set of stop words
 
         set1.difference_update(set2)
 

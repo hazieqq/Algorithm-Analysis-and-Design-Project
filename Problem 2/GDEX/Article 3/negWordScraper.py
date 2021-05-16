@@ -3,7 +3,7 @@ from bs4 import BeautifulSoup
 import re
 import os
 
-
+y = 0
 def webScrape(driver, URL, fileName):
     driver.get(URL)
     text_file = open(fileName, "w")
@@ -120,6 +120,8 @@ def negative():
         text2 = readOutputNegative(outNegText)
     
         sum = writeFreqNeg(text1, text2, savePath)
+        global y 
+        y = sum
         writeTotalNeg(sum, savePath)
 
         # driver.close()

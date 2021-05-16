@@ -1,4 +1,7 @@
 delays
+bad
 issue
-sap
 restriction
+drastic
+loss
+sap

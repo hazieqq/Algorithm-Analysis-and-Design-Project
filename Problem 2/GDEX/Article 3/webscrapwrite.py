@@ -7,6 +7,8 @@ import os
 from swprogram import excludeStopw
 from posWordScraper import positive
 from negWordScraper import negative
+from neutralWord import neutral
+from calculate import calc
 from posWordGraph import posGraph
 from negWordGraph import negGraph
 from posNegWordGraph import PosNegGraph
@@ -61,10 +63,12 @@ try:
     excludeStopw()
     positive()
     negative()
-    posGraph()
-    negGraph()
-    PosNegGraph()
-    CountGraph()
+    neutral()
+    calc()
+    # posGraph()
+    # negGraph()
+    # PosNegGraph()
+    # CountGraph()
 
 except FileNotFoundError:
     print("file not found")

@@ -70,7 +70,6 @@ def readOutputPositive(fileName2):
     file2.close()
     return text
 
-
 def writeFreqPos(text1, text2, savePath):
     index = 0
     sum = 0
