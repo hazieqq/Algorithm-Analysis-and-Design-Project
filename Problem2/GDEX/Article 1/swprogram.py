@@ -3,7 +3,7 @@ import os
 
 def excludeStopw():
     try:
-        savePath = 'Problem 2\GDEX\Article 1'
+        savePath = 'Problem2\GDEX\Article 1'
         fileName = "stopwords.txt"
         stop_word = os.path.join(savePath, fileName)
         stop_word_file = open(stop_word, "r")

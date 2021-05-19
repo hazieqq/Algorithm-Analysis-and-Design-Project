@@ -14,12 +14,15 @@ from negWordGraph import negGraph
 from posNegWordGraph import PosNegGraph
 from wordCountGraph import CountGraph
 
+from Article2 import webscrapwrite2
+from Article3 import webscrapwrite3
+
 #5 (a)
 try:
-    PATH = "Problem 2\chromedriver.exe"
-    URL = "https://www.theedgemarkets.com/article/gdex-partners-tasco-improve-logistics-delivery-services"
+    PATH = "Problem2\chromedriver.exe"
+    URL = "https://www.theedgemarkets.com/article/gdex-stands-benefit-pickup-ecommerce-activities-says-kenanga-research"
     driver = webdriver.Chrome(PATH)
-    savePath = 'Problem 2\GDEX\Article 2'
+    savePath = 'Problem2\GDEX\Article 1'
     fileName1 = "sample.txt"
     fileName2 = "data.txt"
     sampleText = os.path.join(savePath, fileName1)
@@ -60,15 +63,17 @@ try:
     text_file.close()
     driver.close()
 
-    excludeStopw()
-    positive()
-    negative()
-    neutral()
-    calc()
-    posGraph()
-    negGraph()
-    PosNegGraph()
-    CountGraph()
-
+    # excludeStopw()
+    # positive()
+    # negative()
+    # neutral()
+    # calc()
+    # posGraph()
+    # negGraph()
+    # PosNegGraph()
+    # CountGraph()
+    webscrapwrite2.article2()
+    webscrapwrite3.article3()
+    
 except FileNotFoundError:
     print("file not found")
