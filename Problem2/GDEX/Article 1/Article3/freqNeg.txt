@@ -1,7 +1,0 @@
-delays,2
-bad,1
-issue,2
-restriction,1
-drastic,1
-loss,1
-sap,1

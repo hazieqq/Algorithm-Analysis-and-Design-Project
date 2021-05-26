@@ -1,6 +1,0 @@
-punish,1
-disturbing,1
-complaint,1
-guilty,1
-shocking,1
-culprit,1

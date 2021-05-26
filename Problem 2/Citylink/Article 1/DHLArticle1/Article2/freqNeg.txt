@@ -1,0 +1,3 @@
+devastate,1
+complex,1
+stringent,2
