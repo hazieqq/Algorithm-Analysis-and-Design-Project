@@ -27,9 +27,6 @@ from Citylink.Article1.JTArticle1.webscrapwrite import JT
 from Citylink.Article1.PosLajuArticle1.webscrapwrite import PosLaju
 
 
-
-
-
 def City():
 
     #5 (a)
@@ -50,7 +47,8 @@ def City():
         page = driver.page_source
         page_soup = BeautifulSoup(page, 'html.parser')
 
-        article = page_soup.find('section', attrs={'class': 'single-post-content clearfix'})
+        article = page_soup.find(
+            'section', attrs={'class': 'single-post-content clearfix'})
 
         for p in article.find_all('p'):
             n = text_file.write(p.text + "\n")
@@ -62,8 +60,8 @@ def City():
         wordstring = wordstring.lower()
         wordstring = wordstring.replace('"', "")
         wordlist = re.findall(r"[\w&']+", wordstring)
-        #print(wordlist)
-        
+        # print(wordlist)
+
         # remove duplicate & print to text file
 
         output = open(dataText, "w")
@@ -95,19 +93,22 @@ def City():
         # print(y)
         # print(z)
 
-        totalCity = x + y + z 
+        totalCity = x + y + z
         totalDhl = dhl()
         totalGDEX = GDEX()
         totalJT = JT()
         totalPosLaju = PosLaju()
 
-        arr = [totalCity,totalDhl,totalGDEX,totalJT,totalPosLaju]
+        # arr = [totalCity, totalDhl, totalGDEX, totalJT, totalPosLaju]
+        arr = {'City-Link': totalCity, 'DHL': totalDhl, 'GDEX': totalGDEX,
+               'J&T': totalJT, 'PosLaju': totalPosLaju}
 
-        print("city ",totalCity)
-        print("dhl ",totalDhl)
-        print("GDEx ",totalGDEX)
-        print("Jt ",totalJT)
-        print("Poslaju ",totalPosLaju)
+        print("City-Link:", totalCity)
+        print("DHL:", totalDhl)
+        print("GDEX:", totalGDEX)
+        print("J&T:", totalJT)
+        print("PosLaju:", totalPosLaju)
+        print()
 
         return arr
     except FileNotFoundError:

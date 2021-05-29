@@ -1,6 +1,6 @@
-service
 major
+service
 flexibility
-affordable
-will
 well
+will
+affordable

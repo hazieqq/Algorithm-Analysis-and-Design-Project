@@ -1,6 +1,6 @@
-service,5
 major,1
+service,5
 flexibility,1
-affordable,1
-will,1
 well,1
+will,1
+affordable,1

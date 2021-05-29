@@ -11,24 +11,24 @@ GDEX = (3.265154613796736, 101.68024844550233)
 JT = (2.9441205329488325, 101.7901521759029)
 DHL = (3.2127230893650065, 101.57467295692778)
 
-colorCode = ("red","purple","blue")
+colorCode = ("red", "purple", "blue")
 
 n = int(input("Enter number of customer: "))
-customerOriLats =[]
-customerOriLngs =[] 
-customerDestLats =[]
-customerDestLngs =[]
+customerOriLats = []
+customerOriLngs = []
+customerDestLats = []
+customerDestLngs = []
 
-for i in range(0,n):
-    print('Enter origin latitudes for customer ',end=': '+'\n')
+for i in range(0, n):
+    print('Enter origin latitudes for customer ', end=': '+'\n')
     custOriLats = float(input())
-    print('Enter origin longitudes for customer ',end=': '+'\n')
+    print('Enter origin longitudes for customer ', end=': '+'\n')
     custOriLngs = float(input())
-    print('Enter destination latitudes for customer ',end=': '+'\n')
+    print('Enter destination latitudes for customer ', end=': '+'\n')
     custDestLats = float(input())
-    print('Enter destination longitudes for customer ',end=': '+'\n')
+    print('Enter destination longitudes for customer ', end=': '+'\n')
     custDestLngs = float(input())
-    
+
     customerOriLats.append(custOriLats)
     customerOriLngs.append(custOriLngs)
     customerDestLats.append(custDestLats)
@@ -41,29 +41,26 @@ courierCoorLats, courierCoorLangs = zip(
 courierNames = ['City-link Express', 'Pos Laju', 'GDEX', 'JT', 'DHL']
 
 
-
-
-
 chosenCourier = []
 
 
-def markLocation(gmap, courierCoorLats, courierCoorLangs,colorCode):
+def markLocation(gmap, courierCoorLats, courierCoorLangs, colorCode):
 
     for i in range(5):
         gmap.marker(courierCoorLats[i], courierCoorLangs[i],
-                    color='cornflowerblue',info_window=courierNames[i])
+                    color='cornflowerblue', info_window=courierNames[i])
 
-    for i in range(0,n):
+    for i in range(0, n):
         gmap.marker(customerOriLats[i], customerOriLngs[i], color=colorCode[i])
-        gmap.marker(customerDestLats[i], customerDestLngs[i], color=colorCode[i])
-    
-    
+        gmap.marker(customerDestLats[i],
+                    customerDestLngs[i], color=colorCode[i])
+
 
 def printBeforeDistance(customerOrilats, customerOriLngs,
                         customerDestlats, customerDestLngs):
 
-    for i in range(0,n):
-        
+    for i in range(0, n):
+
         stick1 = str(customerOriLats[i]) + "," + str(customerOriLngs[i])
         stick2 = str(customerDestLats[i]) + "," + str(customerDestLngs[i])
         url = ("https://maps.googleapis.com/maps/api/distancematrix/json?units=km&origins="
@@ -72,22 +69,25 @@ def printBeforeDistance(customerOrilats, customerOriLngs,
         print('Distance for Customer', i+1, '(Before):',
               output["rows"][0]["elements"][0]["distance"]["text"])
 
-dis =[]
-dis1=[]
+
+dis = []
+dis1 = []
 distance = []
+
+
 def printAfterDistance(customer_ori_lats, customer_ori_lngs,
                        customer_dest_lats, customer_dest_lngs,
                        courierCoorLats, courierCoorLangs, courierNames,):
-    
-    for i in range(0,n):
-       
+
+    for i in range(0, n):
+
         stick1 = str(customerOriLats[i]) + "," + str(customerOriLngs[i])
         stick2 = str(customerDestLats[i]) + "," + str(customerDestLngs[i])
-        
-        g = Graph("",[])
+
+        g = Graph("", [])
         courierNames = ['City-link Express', 'Pos Laju', 'GDEX', 'J&T', 'DHL']
         for j in range(5):
-            
+
             stick3 = str(courierCoorLats[j]) + "," + str(courierCoorLangs[j])
             urlOriginToHub = ("https://maps.googleapis.com/maps/api/distancematrix/json?units=km&origins="
                               + stick1 + "&destinations=" + stick3 + "&key=" + apikey)
@@ -103,17 +103,17 @@ def printAfterDistance(customer_ori_lats, customer_ori_lngs,
                             0])) + float(distanceHubToDest.split()[0]))
             dis.append((float(distanceOriginToHub.split()[0])))
             dis1.append(float(distanceHubToDest.split()[0]))
-        graph = [[0,dis[0],0,dis[1],dis[2],dis[3],dis[4]],
-                [dis[0],0,dis1[0],0,0,0,0],
-                [0,dis1[0],0,dis1[1],dis1[2],dis1[3],dis1[4]],
-                [dis[1],0,dis1[1],0,0,0,0],
-                [dis[2],0,dis1[2],0,0,0,0],
-                [dis[3],0,dis1[3],0,0,0,0],
-                [dis[4],0,dis1[4],0,0,0,0]]  
-        courier = g.dijkstra(graph,0)
+        graph = [[0, dis[0], 0, dis[1], dis[2], dis[3], dis[4]],
+                 [dis[0], 0, dis1[0], 0, 0, 0, 0],
+                 [0, dis1[0], 0, dis1[1], dis1[2], dis1[3], dis1[4]],
+                 [dis[1], 0, dis1[1], 0, 0, 0, 0],
+                 [dis[2], 0, dis1[2], 0, 0, 0, 0],
+                 [dis[3], 0, dis1[3], 0, 0, 0, 0],
+                 [dis[4], 0, dis1[4], 0, 0, 0, 0]]
+        courier = g.dijkstra(graph, 0)
         print(courier)
         dis.clear()
-        dis1.clear()  
+        dis1.clear()
         # for k in range(len(courierNames)):
         #     for j in range(1, len(courierNames)):
         #         if distance[k] > distance[j]:
@@ -125,22 +125,51 @@ def printAfterDistance(customer_ori_lats, customer_ori_lngs,
         #             courierNames[j] = courierNames[k]
         #             courierNames[k] = temp1
         #     break
-        courier1=None
-        if(int(str(courier[1])[1])==1):
-            courier1=0
+        courier1 = None
+        if(int(str(courier[1])[1]) == 1):
+            courier1 = 0
         else:
-            courier1=int(str(courier[1])[1])-2
+            courier1 = int(str(courier[1])[1])-2
 
-        print('Closest courier hub to Customer', i+1, ':', courierNames[courier1])
+        print('Closest courier hub to Customer',
+              i+1, ':', courierNames[courier1])
         print('Distance for Customer', i+1, '(After):', courier[0], 'km')
         chosenCourier.append(int(courier1))
-        
+
+
+def rateCourierHub(hubs):
+    percHubs = {}
+    noOfHubs = len(hubs)
+    totalHubs = 0
+
+    for hub in hubs:
+        hubs[hub] += round(hubs[hub]*100)
+        percHubs[hub] = hubs[hub]
+
+    for hub in percHubs:
+        totalHubs += percHubs[hub]
+
+    avrgHub = totalHubs/noOfHubs
+    maxRating = avrgHub*2
+
+    for hub in percHubs:
+        if percHubs[hub] > 0 and percHubs[hub] <= (maxRating/noOfHubs):
+            print('Rating for', hub, ': 1')
+        elif percHubs[hub] <= ((maxRating/noOfHubs)*2):
+            print('Rating for', hub, ': 2')
+        elif percHubs[hub] <= ((maxRating/noOfHubs)*3):
+            print('Rating for', hub, ': 3')
+        elif percHubs[hub] <= ((maxRating/noOfHubs)*4):
+            print('Rating for', hub, ': 4')
+        elif percHubs[hub] <= maxRating:
+            print('Rating for', hub, ': 5')
 
 
 apikey = 'AIzaSyCz9ZuEqAI4Sbg0G-F91etEvlhIt1Le0d0'
-gmap = gmplot.GoogleMapPlotter(4.2105, 101.9758, 14, apikey=apikey, map_styles=style())
+gmap = gmplot.GoogleMapPlotter(
+    4.2105, 101.9758, 14, apikey=apikey, map_styles=style())
 # question 1
-markLocation(gmap, courierCoorLats, courierCoorLangs,colorCode)
+markLocation(gmap, courierCoorLats, courierCoorLangs, colorCode)
 
 # question 2
 printBeforeDistance(customerOriLats, customerOriLngs,
@@ -162,18 +191,18 @@ printAfterDistance(customerOriLats, customerOriLngs,
 #     gmap.directions(custZip, custDestZip)
 
 # after algo
-for i in range(0,n):
-  custZip = (customerOriLats[i],customerOriLngs[i])
-  custDestZip = (customerDestLats[i],customerDestLngs[i])
-  # gmap.directions(custZip, chosenCourier[i])
-  gmap.directions(
-      (customerOriLats[i],customerOriLngs[i]),
-      (customerDestLats[i],customerDestLngs[i]),
-      waypoints=[
-          (courierCoorLats[chosenCourier[i]],courierCoorLangs[chosenCourier[i]])
-      ]
-  )
+for i in range(0, n):
+    custZip = (customerOriLats[i], customerOriLngs[i])
+    custDestZip = (customerDestLats[i], customerDestLngs[i])
+    # gmap.directions(custZip, chosenCourier[i])
+    gmap.directions(
+        (customerOriLats[i], customerOriLngs[i]),
+        (customerDestLats[i], customerDestLngs[i]),
+        waypoints=[
+            (courierCoorLats[chosenCourier[i]],
+             courierCoorLangs[chosenCourier[i]])
+        ]
+    )
 
-print(City())
-
+rateCourierHub(City())
 gmap.draw('map.html')

@@ -1,9 +1,9 @@
-love,1
 bonus,3
-support,1
-clear,1
-consideration,1
-special,1
-will,3
+love,1
 time,1
+clear,1
+support,1
+consideration,1
 better,1
+will,3
+special,1

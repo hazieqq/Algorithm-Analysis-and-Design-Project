@@ -1,5 +1,5 @@
-resistance
 loss
-downside
-absence
 risk
+absence
+downside
+resistance
