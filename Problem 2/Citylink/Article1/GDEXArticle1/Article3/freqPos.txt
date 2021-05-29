@@ -1,0 +1,16 @@
+service,1
+community,1
+order,1
+focus,3
+space,1
+drive,2
+heightened,1
+huge,1
+growth,2
+movement,2
+secure,1
+time,1
+well,2
+will,3
+optimistic,1
+team,1

@@ -1,3 +1,0 @@
-touted,1
-gross,1
-restrict,1

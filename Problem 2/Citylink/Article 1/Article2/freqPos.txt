@@ -1,2 +1,0 @@
-worth,1
-serve,1

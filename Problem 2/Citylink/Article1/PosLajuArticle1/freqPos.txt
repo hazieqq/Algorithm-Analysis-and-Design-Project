@@ -1,0 +1,15 @@
+service,1
+win,1
+aim,1
+accepted,1
+order,1
+benefit,1
+support,1
+transformation,1
+addition,1
+reliability,1
+will,3
+allowing,1
+movement,1
+quality,1
+good,1

@@ -1,0 +1,8 @@
+recognition,1
+eager,1
+consistent,1
+benefit,1
+open,1
+supported,1
+balance,1
+healthy,1

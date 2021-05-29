@@ -1,2 +1,0 @@
-rigidity,1
-mock,1
