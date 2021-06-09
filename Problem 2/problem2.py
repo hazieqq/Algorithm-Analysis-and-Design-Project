@@ -2,6 +2,7 @@ import gmplot
 import requests
 from map_styles import style
 from dijikstra import Graph
+from try1 import JohnsonAlgorithm
 from Citylink.Article1.webscrapwrite import City
 
 # coordinates of courier companies
@@ -110,8 +111,9 @@ def printAfterDistance(customer_ori_lats, customer_ori_lngs,
                  [dis[2], 0, dis1[2], 0, 0, 0, 0],
                  [dis[3], 0, dis1[3], 0, 0, 0, 0],
                  [dis[4], 0, dis1[4], 0, 0, 0, 0]]
-        courier = g.dijkstra(graph, 0)
-        print(courier)
+        # courier = g.dijkstra(graph, 0)
+        courier = JohnsonAlgorithm(graph)
+        # print(courier)
         dis.clear()
         dis1.clear()
         # for k in range(len(courierNames)):
@@ -126,18 +128,19 @@ def printAfterDistance(customer_ori_lats, customer_ori_lngs,
         #             courierNames[k] = temp1
         #     break
         courier1 = None
-        if(int(str(courier[1])[1]) == 1):
+        if(int(courier[1]) == 1):
             courier1 = 0
         else:
-            courier1 = int(str(courier[1])[1])-2
+            courier1 = int(courier[1])-2
 
         print('Closest courier hub to Customer',
               i+1, ':', courierNames[courier1])
         print('Distance for Customer', i+1, '(After):', courier[0], 'km')
         chosenCourier.append(int(courier1))
+    return distance
 
 
-def rateCourierHub(hubs):
+def rateCourierHub(hubs,dis):
     percHubs = {}
     noOfHubs = len(hubs)
     totalHubs = 0
@@ -151,18 +154,20 @@ def rateCourierHub(hubs):
 
     avrgHub = totalHubs/noOfHubs
     maxRating = avrgHub*2
-
+    print("Hubs\t\t\t\tRating\t\t\tDistance")
+    index = int(0)
     for hub in percHubs:
         if percHubs[hub] > 0 and percHubs[hub] <= (maxRating/noOfHubs):
-            print('Rating for', hub, ': 1')
+            print(hub,"\t\t\t\t1\t\t\t",round(dis[index],2))
         elif percHubs[hub] <= ((maxRating/noOfHubs)*2):
-            print('Rating for', hub, ': 2')
+            print(hub,"\t\t\t\t2\t\t\t",round(dis[index],2))
         elif percHubs[hub] <= ((maxRating/noOfHubs)*3):
-            print('Rating for', hub, ': 3')
+            print(hub,"\t\t\t3\t\t\t",round(dis[index],2))
         elif percHubs[hub] <= ((maxRating/noOfHubs)*4):
-            print('Rating for', hub, ': 4')
+            print(hub,"\t\t\t\t4\t\t\t",round(dis[index],2))
         elif percHubs[hub] <= maxRating:
-            print('Rating for', hub, ': 5')
+            print(hub,"\t\t\t\t5\t\t\t",round(dis[index],2),"KM")
+        index += 1
 
 
 apikey = 'AIzaSyCz9ZuEqAI4Sbg0G-F91etEvlhIt1Le0d0'
@@ -176,7 +181,7 @@ printBeforeDistance(customerOriLats, customerOriLngs,
                     customerDestLats, customerDestLngs)
 
 # question 3
-printAfterDistance(customerOriLats, customerOriLngs,
+dis = printAfterDistance(customerOriLats, customerOriLngs,
                    customerDestLats, customerDestLngs,
                    courierCoorLats, courierCoorLangs, courierNames)
 
@@ -204,5 +209,5 @@ for i in range(0, n):
         ]
     )
 
-rateCourierHub(City())
+rateCourierHub(City(),dis)
 gmap.draw('map.html')

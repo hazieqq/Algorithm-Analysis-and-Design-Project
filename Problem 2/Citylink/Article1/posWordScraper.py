@@ -46,21 +46,54 @@ def readSampleText(savePath):
     file1.close()
     return text
 
+def search(pat, txt):
+    M = len(pat)
+    N = len(txt)
+
+    for i in range(N - M + 1):
+        j = 0
+            
+        while(j < M):                          #size of pattern
+            if (txt[i + j] != pat[j]):
+                break
+            j += 1
+
+        if (j == M and M == N):
+            return True
+
+
 
 def outputPositive(fileName1, fileName2, savePath):
     # compare two files, if same output put into another file
     # (txt file website yang kita scrape with scraped positive file)
     fileName = 'update_news.txt'
     upNewsText = os.path.join(savePath, fileName)
+    filesatu = open(fileName1,'r')
+    filedua = open(upNewsText,'r')
+    textsatu = filesatu.read()
+    textdua = filedua.read()
+    textsatu = textsatu.splitlines()
+    textdua = textdua.split()
+    pos =[]
+    for i in range(len(textsatu)):
+        for j in range(len(textdua)):
+            if search(textsatu[i],textdua[j]):
+                pos.append(textdua[j])
+            
 
-    with open(upNewsText, 'r') as file1:
-        with open(fileName1, 'r') as file2:
-            same = set(file1).intersection(file2)
-    same.discard('\n')
+
+    # with open(upNewsText, 'r') as file1:
+    #     with open(fileName1, 'r') as file2:
+    #         same = set(file1).intersection(file2)
+    # print(same)
+    # same.discard('\n')
 
     with open(fileName2, 'w') as file_out:
-        for line in same:
-            file_out.write(line)
+        for i in range(len(pos)):
+            file_out.write(pos[i])
+            file_out.write('\n')
+        # for line in same:
+        #     file_out.write(line)
 
 
 def readOutputPositive(fileName2):

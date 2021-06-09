@@ -1,4 +1,6 @@
 restriction,1
-delays,2
 issue,2
+delays,2
+sharply,1
 sap,1
+disruption,1

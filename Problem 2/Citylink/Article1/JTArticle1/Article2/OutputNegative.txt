@@ -1,10 +1,10 @@
-denied
 violent
-fault
-misunderstanding
-issue
 damaged
+issue
+fault
+denied
+misunderstanding
+complaints
 lost
 mishandle
 prejudice
-complaints

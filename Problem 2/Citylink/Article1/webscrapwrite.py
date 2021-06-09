@@ -89,9 +89,9 @@ def City():
         y = webscrapwrite2.article2()
         z = webscrapwrite3.article3()
 
-        # print(x)
-        # print(y)
-        # print(z)
+        print(x)
+        print(y)
+        print(z)
 
         totalCity = x + y + z
         totalDhl = dhl()
@@ -111,5 +111,6 @@ def City():
         print()
 
         return arr
+        return 0
     except FileNotFoundError:
         print("file not found")

@@ -1,5 +1,10 @@
+follow,1
+us,1
+on,5
+instagram,1
+and,13
 subscribe,1
-to,13
+to,12
 our,2
 telegram,1
 channel,1
@@ -7,11 +12,6 @@ for,9
 the,21
 latest,1
 updates,1
-on,5
-news,1
-you,1
-need,1
-know,1
 kuala,1
 lumpur,1
 feb,1
@@ -58,7 +58,6 @@ workers,1
 over,1
 bonus,3
 payments,1
-and,12
 denied,1
 it,4
 will,3

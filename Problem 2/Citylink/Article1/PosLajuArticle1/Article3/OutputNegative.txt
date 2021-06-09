@@ -1,6 +1,6 @@
-complaint
-guilty
-disturbing
 punish
-shocking
 culprit
+disturbing
+guilty
+complaint
+shocking
