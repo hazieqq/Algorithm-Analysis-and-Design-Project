@@ -160,23 +160,21 @@ def rateCourierHub(hubs,dis):
     for i in range(n):
         for hub in percHubs:
             if percHubs[hub] > 0 and percHubs[hub] <= (maxRating/noOfHubs):
-                print(hub,"\t\t\t\t1\t\t\t",round(dis[index],2))
+                # print(hub,"\t\t\t\t1\t\t\t",round(dis[index],2))
                 rating.append(1)
             elif percHubs[hub] <= ((maxRating/noOfHubs)*2):
-                print(hub,"\t\t\t\t2\t\t\t",round(dis[index],2))
+                # print(hub,"\t\t\t\t2\t\t\t",round(dis[index],2))
                 rating.append(2)
             elif percHubs[hub] <= ((maxRating/noOfHubs)*3):
-                print(hub,"\t\t\t3\t\t\t",round(dis[index],2))
+                # print(hub,"\t\t\t3\t\t\t",round(dis[index],2))
                 rating.append(3)
             elif percHubs[hub] <= ((maxRating/noOfHubs)*4):
-                print(hub,"\t\t\t\t4\t\t\t",round(dis[index],2))
+                # print(hub,"\t\t\t\t4\t\t\t",round(dis[index],2))
                 rating.append(4)
             elif percHubs[hub] <= maxRating:
-                print(hub,"\t\t\t\t5\t\t\t",round(dis[index],2),"KM")
+                # print(hub,"\t\t\t\t5\t\t\t",round(dis[index],2),"KM")
                 rating.append(5)
             index += 1
-        
-    
     return rating
 
 # Problem 3
@@ -186,7 +184,7 @@ def recommendation(rating,distances,hubs):
     # dis ={}
     maximumrating = max(rating)
     min_dis = max(distances)
-    total={}
+    total=[]
     rank = {}
     print(min_dis)
     print(maximumrating)
@@ -215,10 +213,15 @@ def recommendation(rating,distances,hubs):
 
     # print("recommendation\n",total)
     index=0
-    for i in range (n):
+    total1= []
+    print("--------------------------------------------------")
+    for i in range(0,n):
         for hub in hubs:
             print(hub,"\t\t\t\t",round(total[index],2))
+            # total1.append(max(total[index])) 
+            print("--------------------------------------------------")
             index += 1
+    print(total1)
         
     
         
