@@ -1,6 +1,7 @@
-restriction,1
+loss,1
+sap,1
 issue,2
 delays,2
-sharply,1
-sap,1
-disruption,1
+overweight,1
+overlook,1
+restriction,1

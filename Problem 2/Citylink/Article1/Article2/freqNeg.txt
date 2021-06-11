@@ -1,6 +1,6 @@
-criminal,1
-intimidation,1
-complaining,1
-stealing,2
 guilty,1
+criminal,1
+complaining,1
+intimidation,1
 prison,1
+stealing,2

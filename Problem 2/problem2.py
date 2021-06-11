@@ -74,7 +74,7 @@ def printBeforeDistance(customerOrilats, customerOriLngs,
 dis = []
 dis1 = []
 distance = []
-
+rating = []
 
 def printAfterDistance(customer_ori_lats, customer_ori_lngs,
                        customer_dest_lats, customer_dest_lngs,
@@ -144,6 +144,7 @@ def rateCourierHub(hubs,dis):
     percHubs = {}
     noOfHubs = len(hubs)
     totalHubs = 0
+    
 
     for hub in hubs:
         hubs[hub] += round(hubs[hub]*100)
@@ -156,34 +157,96 @@ def rateCourierHub(hubs,dis):
     maxRating = avrgHub*2
     print("Hubs\t\t\t\tRating\t\t\tDistance")
     index = int(0)
-    for hub in percHubs:
-        if percHubs[hub] > 0 and percHubs[hub] <= (maxRating/noOfHubs):
-            print(hub,"\t\t\t\t1\t\t\t",round(dis[index],2))
-        elif percHubs[hub] <= ((maxRating/noOfHubs)*2):
-            print(hub,"\t\t\t\t2\t\t\t",round(dis[index],2))
-        elif percHubs[hub] <= ((maxRating/noOfHubs)*3):
-            print(hub,"\t\t\t3\t\t\t",round(dis[index],2))
-        elif percHubs[hub] <= ((maxRating/noOfHubs)*4):
-            print(hub,"\t\t\t\t4\t\t\t",round(dis[index],2))
-        elif percHubs[hub] <= maxRating:
-            print(hub,"\t\t\t\t5\t\t\t",round(dis[index],2),"KM")
-        index += 1
+    for i in range(n):
+        for hub in percHubs:
+            if percHubs[hub] > 0 and percHubs[hub] <= (maxRating/noOfHubs):
+                print(hub,"\t\t\t\t1\t\t\t",round(dis[index],2))
+                rating.append(1)
+            elif percHubs[hub] <= ((maxRating/noOfHubs)*2):
+                print(hub,"\t\t\t\t2\t\t\t",round(dis[index],2))
+                rating.append(2)
+            elif percHubs[hub] <= ((maxRating/noOfHubs)*3):
+                print(hub,"\t\t\t3\t\t\t",round(dis[index],2))
+                rating.append(3)
+            elif percHubs[hub] <= ((maxRating/noOfHubs)*4):
+                print(hub,"\t\t\t\t4\t\t\t",round(dis[index],2))
+                rating.append(4)
+            elif percHubs[hub] <= maxRating:
+                print(hub,"\t\t\t\t5\t\t\t",round(dis[index],2),"KM")
+                rating.append(5)
+            index += 1
+        
+    
+    return rating
+
+# Problem 3
+
+def recommendation(rating,distances,hubs):
+    # rating = {}
+    # dis ={}
+    maximumrating = max(rating)
+    min_dis = max(distances)
+    total={}
+    rank = {}
+    print(min_dis)
+    print(maximumrating)
+    for j in range(len(rating)):
+        rating[j] = rating[j]/maximumrating*0.5
+
+    for  k in range(len(distances)):
+        distances[k] = min_dis/distances[k]*0.5
+
+    for  l in range (len(rating)):
+        total.append(rating[l]+dis[l])
+        # round(total[j],2)
+    
+    
+
+    # for m in range(len(total)):
+    #     for n in range(len(total)):
+    #         if total[m]>total[n]:
+    #             temp = total[n]
+    #             total[n] = total[m]
+    #             total[m] = temp
+
+    #             temp = hubs[n]
+    #             hubs[n] = hubs[m]
+    #             hubs[m] = temp
+
+    # print("recommendation\n",total)
+    index=0
+    for i in range (n):
+        for hub in hubs:
+            print(hub,"\t\t\t\t",round(total[index],2))
+            index += 1
+        
+    
+        
+
+    
 
 
+
+
+
+    
+    
 apikey = 'AIzaSyCz9ZuEqAI4Sbg0G-F91etEvlhIt1Le0d0'
-gmap = gmplot.GoogleMapPlotter(
-    4.2105, 101.9758, 14, apikey=apikey, map_styles=style())
-# question 1
-markLocation(gmap, courierCoorLats, courierCoorLangs, colorCode)
+# gmap = gmplot.GoogleMapPlotter(
+#     4.2105, 101.9758, 14, apikey=apikey, map_styles=style())
+# # question 1
+# markLocation(gmap, courierCoorLats, courierCoorLangs, colorCode)
 
-# question 2
-printBeforeDistance(customerOriLats, customerOriLngs,
-                    customerDestLats, customerDestLngs)
+# # question 2
+# printBeforeDistance(customerOriLats, customerOriLngs,
+#                     customerDestLats, customerDestLngs)
 
 # question 3
 dis = printAfterDistance(customerOriLats, customerOriLngs,
                    customerDestLats, customerDestLngs,
                    courierCoorLats, courierCoorLangs, courierNames)
+
+# print(distance)
 
 # question 4
 # gmap.plot(*distCust1BefPath, edge_width=7, color='red')
@@ -196,18 +259,23 @@ dis = printAfterDistance(customerOriLats, customerOriLngs,
 #     gmap.directions(custZip, custDestZip)
 
 # after algo
-for i in range(0, n):
-    custZip = (customerOriLats[i], customerOriLngs[i])
-    custDestZip = (customerDestLats[i], customerDestLngs[i])
-    # gmap.directions(custZip, chosenCourier[i])
-    gmap.directions(
-        (customerOriLats[i], customerOriLngs[i]),
-        (customerDestLats[i], customerDestLngs[i]),
-        waypoints=[
-            (courierCoorLats[chosenCourier[i]],
-             courierCoorLangs[chosenCourier[i]])
-        ]
-    )
+# for i in range(0, n):
+#     custZip = (customerOriLats[i], customerOriLngs[i])
+#     custDestZip = (customerDestLats[i], customerDestLngs[i])
+#     # gmap.directions(custZip, chosenCourier[i])
+#     gmap.directions(
+#         (customerOriLats[i], customerOriLngs[i]),
+#         (customerDestLats[i], customerDestLngs[i]),
+#         waypoints=[
+#             (courierCoorLats[chosenCourier[i]],
+#              courierCoorLangs[chosenCourier[i]])
+#         ]
+#     )
 
-rateCourierHub(City(),dis)
-gmap.draw('map.html')
+hubs = City()
+rating = rateCourierHub(hubs,dis)
+# print(rating)
+# print(len(rating))
+recommendation(rating,dis,hubs)
+
+# gmap.draw('map.html')
