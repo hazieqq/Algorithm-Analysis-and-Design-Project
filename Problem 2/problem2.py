@@ -191,9 +191,8 @@ def recommendation(rating,distances,hubs):
     min_dis = min(distances)
     total=[]
     # total2=[][]
-    rank = {}
-    print(min_dis)
-    print(maximumrating)
+    
+    
     for j in range(len(rating)):
         rating[j] = rating[j]/maximumrating*0.5
 
@@ -208,12 +207,6 @@ def recommendation(rating,distances,hubs):
         for hub in hubs:
             hub_name.append(hub)
 
-    for i in range(len(distances)):
-        print("hub name = ", distances[i])
-    for i in range(len(rating)):
-        print("hub name = ", rating[i])
-    for i in range(len(hub_name)):
-        print("hub name = ", hub_name[i])
 
     index = 0
     init = 0
@@ -365,8 +358,7 @@ dis = printAfterDistance(customerOriLats, customerOriLngs,
 
 hubs = City()
 rating = rateCourierHub(hubs,dis)
-# print(rating)
-# print(len(rating))
+
 recommendation(rating,dis,hubs)
 
 # gmap.draw('map.html')
