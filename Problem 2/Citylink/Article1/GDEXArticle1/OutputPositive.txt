@@ -1,8 +1,8 @@
-open
-eager
-balance
-supported
-benefit
-consistent
-recognition
 healthy
+benefit
+supported
+balance
+consistent
+eager
+recognition
+open

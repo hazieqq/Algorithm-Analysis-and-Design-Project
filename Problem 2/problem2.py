@@ -180,11 +180,17 @@ def rateCourierHub(hubs,dis):
 # Problem 3
 
 def recommendation(rating,distances,hubs):
+
+    
     # rating = {}
     # dis ={}
+    hub_name = []
+    # distan = [][]
+    # rated = [][]
     maximumrating = max(rating)
-    min_dis = max(distances)
+    min_dis = min(distances)
     total=[]
+    # total2=[][]
     rank = {}
     print(min_dis)
     print(maximumrating)
@@ -196,32 +202,114 @@ def recommendation(rating,distances,hubs):
 
     for  l in range (len(rating)):
         total.append(rating[l]+dis[l])
-        # round(total[j],2)
+        round(total[l],2)
+
+    for i in range(n):
+        for hub in hubs:
+            hub_name.append(hub)
+
+    for i in range(len(distances)):
+        print("hub name = ", distances[i])
+    for i in range(len(rating)):
+        print("hub name = ", rating[i])
+    for i in range(len(hub_name)):
+        print("hub name = ", hub_name[i])
+
+    index = 0
+    init = 0
+    for i in range(n):
+        for q in range(init, init+5):
+            for k in range(init, init+5):
+                if total[q]>total[k]:
+
+                    temp = total[k]
+                    total[k] = total[q]
+                    total[q] = temp
+
+                    temp = hub_name[k]
+                    hub_name[k] = hub_name[q]
+                    hub_name[q] = temp
+
+            index+=1
+        init = index
+    custom = 1
+    for i in range(len(hub_name)):
+        # print("hub name = ", hub_name[i]," - ",total[i])
+        if i%5==0:
+
+            print("--------------------------------------------------")
+            print("recommnded for customer ",custom )
+            custom+=1
+        print(hub_name[i],"\t\t\t\t",round(total[i],2))
+            # total1.append(max(total[index])) 
+
+
+    # index = 0
+    # for i in range(n):
+    #     for j in range(5):
+    #         rated[n][j] = rating[index]
+    #         distan[n][j] = distances[index]
+    #         total2[n][j] = total[index]
+    
+    # for k in range(n):
+    #     index = 0
+    #     for hub in hubs:
+    #         hub_name[n].append(hub)
+    #         index+=1
+    #         if index==5:
+    #             break
+        
+    # for i in range (n):
+    #     for q in range(len(total)):
+    #         for r in range(len(total)):
+    #             if total2[n][q]>total2[n][r]:
+    #                 temp = total2[n][r]
+    #                 total2[n][r] = total2[n][q]
+    #                 total2[n][q] = temp
+
+    #                 temp = hub_name[n][r]
+    #                 hub_name[n][r] = hub_name[n][q]
+    #                 hub_name[n][q] = temp
+
+                    # temp = rated[n][r]
+                    # rated[n][r] = rated[n][q]
+                    # rated[n][q] = temp
+
+                    # temp = distan[n][r]
+                    # distan[n][r] = distan[n][q]
+                    # distan[n][q] = temp
+
+
+
+                
+
+            
+
     
     
 
-    # for m in range(len(total)):
+    # for q in range(len(total)):
     #     for n in range(len(total)):
-    #         if total[m]>total[n]:
+    #         if total[q]>total[n]:
     #             temp = total[n]
-    #             total[n] = total[m]
-    #             total[m] = temp
+    #             total[n] = total[q]
+    #             total[q] = temp
 
     #             temp = hubs[n]
-    #             hubs[n] = hubs[m]
-    #             hubs[m] = temp
+    #             hubs[n] = hubs[q]
+    #             hubs[q] = temp
 
     # print("recommendation\n",total)
-    index=0
-    total1= []
-    print("--------------------------------------------------")
-    for i in range(0,n):
-        for hub in hubs:
-            print(hub,"\t\t\t\t",round(total[index],2))
-            # total1.append(max(total[index])) 
-            print("--------------------------------------------------")
-            index += 1
-    print(total1)
+    # index=0
+    # total1= []
+    # print("--------------------------------------------------")
+    # for i in range(0,n):
+    #     for hub in hubs:
+    #         print(hub,"\t\t\t\t",round(total[index],2))
+    #         # total1.append(max(total[index])) 
+    #         index += 1
+    #     print("--------------------------------------------------")
+    # print(total1)
         
     
         
