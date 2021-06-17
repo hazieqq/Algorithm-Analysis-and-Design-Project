@@ -181,8 +181,6 @@ def rateCourierHub(hubs,dis):
 # Problem 3
 
 def recommendation(rating,distances,hubs):
-
-    
     # rating = {}
     # dis ={}
     hub_name = []
@@ -192,8 +190,8 @@ def recommendation(rating,distances,hubs):
     min_dis = min(distances)
     total=[]
     # total2=[][]
-    
-    
+    print(min_dis)
+    print(maximumrating)
     for j in range(len(rating)):
         rating[j] = rating[j]/maximumrating*0.5
 
@@ -208,6 +206,7 @@ def recommendation(rating,distances,hubs):
         for hub in hubs:
             hub_name.append(hub)
 
+    
 
     index = 0
     init = 0
@@ -226,6 +225,7 @@ def recommendation(rating,distances,hubs):
 
             index+=1
         init = index
+    print("Hubs\t\t\t\tRating\t\t\t Performance Score")
     custom = 1
     print("--------------------------------------------------")
     for i in range(len(hub_name)):
@@ -239,72 +239,7 @@ def recommendation(rating,distances,hubs):
             # total1.append(max(total[index])) 
 
 
-    # index = 0
-    # for i in range(n):
-    #     for j in range(5):
-    #         rated[n][j] = rating[index]
-    #         distan[n][j] = distances[index]
-    #         total2[n][j] = total[index]
-    
-    # for k in range(n):
-    #     index = 0
-    #     for hub in hubs:
-    #         hub_name[n].append(hub)
-    #         index+=1
-    #         if index==5:
-    #             break
-        
-    # for i in range (n):
-    #     for q in range(len(total)):
-    #         for r in range(len(total)):
-    #             if total2[n][q]>total2[n][r]:
-    #                 temp = total2[n][r]
-    #                 total2[n][r] = total2[n][q]
-    #                 total2[n][q] = temp
-
-    #                 temp = hub_name[n][r]
-    #                 hub_name[n][r] = hub_name[n][q]
-    #                 hub_name[n][q] = temp
-
-                    # temp = rated[n][r]
-                    # rated[n][r] = rated[n][q]
-                    # rated[n][q] = temp
-
-                    # temp = distan[n][r]
-                    # distan[n][r] = distan[n][q]
-                    # distan[n][q] = temp
-
-
-
-                
-
-            
-
-    
-    
-
-    # for q in range(len(total)):
-    #     for n in range(len(total)):
-    #         if total[q]>total[n]:
-    #             temp = total[n]
-    #             total[n] = total[q]
-    #             total[q] = temp
-
-    #             temp = hubs[n]
-    #             hubs[n] = hubs[q]
-    #             hubs[q] = temp
-
-    # print("recommendation\n",total)
-    # index=0
-    # total1= []
-    # print("--------------------------------------------------")
-    # for i in range(0,n):
-    #     for hub in hubs:
-    #         print(hub,"\t\t\t\t",round(total[index],2))
-    #         # total1.append(max(total[index])) 
-    #         index += 1
-    #     print("--------------------------------------------------")
-    # print(total1)
+   
         
     
         
@@ -363,7 +298,8 @@ for i in range(0, n):
 
 hubs = City()
 rating = rateCourierHub(hubs,dis)
-
+# print(rating)
+# print(len(rating))
 recommendation(rating,dis,hubs)
 
 gmap.draw('map.html')
