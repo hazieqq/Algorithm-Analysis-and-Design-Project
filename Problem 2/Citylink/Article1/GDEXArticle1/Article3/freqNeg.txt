@@ -1,9 +1,6 @@
+violators,1
+issue,2
+restriction,1
 delays,2
 sap,1
-smoke,1
-restricted,1
-lacking,1
-issue,2
-missed,1
-restriction,1
-complaints,1
+suffer,1

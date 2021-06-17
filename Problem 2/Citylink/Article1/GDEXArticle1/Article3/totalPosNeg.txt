@@ -1,2 +1,2 @@
 Positive Words,22
-Negative Words,11
+Negative Words,8

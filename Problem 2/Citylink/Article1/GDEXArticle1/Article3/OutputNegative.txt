@@ -1,9 +1,6 @@
+violators
+issue
+restriction
 delays
 sap
-smoke
-restricted
-lacking
-issue
-missed
-restriction
-complaints
+suffer

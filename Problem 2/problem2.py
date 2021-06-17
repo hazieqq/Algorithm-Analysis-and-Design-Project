@@ -3,6 +3,8 @@ import requests
 from map_styles import style
 from dijikstra import Graph
 from try1 import JohnsonAlgorithm
+from problem1before import printbefore
+from problem1before import markLocation1
 from Citylink.Article1.webscrapwrite import City
 
 # coordinates of courier companies
@@ -111,7 +113,6 @@ def printAfterDistance(customer_ori_lats, customer_ori_lngs,
                  [dis[2], 0, dis1[2], 0, 0, 0, 0],
                  [dis[3], 0, dis1[3], 0, 0, 0, 0],
                  [dis[4], 0, dis1[4], 0, 0, 0, 0]]
-        # courier = g.dijkstra(graph, 0)
         courier = JohnsonAlgorithm(graph)
         # print(courier)
         dis.clear()
@@ -160,19 +161,19 @@ def rateCourierHub(hubs,dis):
     for i in range(n):
         for hub in percHubs:
             if percHubs[hub] > 0 and percHubs[hub] <= (maxRating/noOfHubs):
-                # print(hub,"\t\t\t\t1\t\t\t",round(dis[index],2))
+                print(hub,"\t\t\t\t1\t\t\t",round(dis[index],2))
                 rating.append(1)
             elif percHubs[hub] <= ((maxRating/noOfHubs)*2):
-                # print(hub,"\t\t\t\t2\t\t\t",round(dis[index],2))
+                print(hub,"\t\t\t\t2\t\t\t",round(dis[index],2))
                 rating.append(2)
             elif percHubs[hub] <= ((maxRating/noOfHubs)*3):
-                # print(hub,"\t\t\t3\t\t\t",round(dis[index],2))
+                print(hub,"\t\t\t3\t\t\t",round(dis[index],2))
                 rating.append(3)
             elif percHubs[hub] <= ((maxRating/noOfHubs)*4):
-                # print(hub,"\t\t\t\t4\t\t\t",round(dis[index],2))
+                print(hub,"\t\t\t\t4\t\t\t",round(dis[index],2))
                 rating.append(4)
             elif percHubs[hub] <= maxRating:
-                # print(hub,"\t\t\t\t5\t\t\t",round(dis[index],2),"KM")
+                print(hub,"\t\t\t\t5\t\t\t",round(dis[index],2),"KM")
                 rating.append(5)
             index += 1
     return rating
@@ -226,6 +227,7 @@ def recommendation(rating,distances,hubs):
             index+=1
         init = index
     custom = 1
+    print("--------------------------------------------------")
     for i in range(len(hub_name)):
         # print("hub name = ", hub_name[i]," - ",total[i])
         if i%5==0:
@@ -316,14 +318,14 @@ def recommendation(rating,distances,hubs):
     
     
 apikey = 'AIzaSyCz9ZuEqAI4Sbg0G-F91etEvlhIt1Le0d0'
-# gmap = gmplot.GoogleMapPlotter(
-#     4.2105, 101.9758, 14, apikey=apikey, map_styles=style())
+gmap = gmplot.GoogleMapPlotter(
+    4.2105, 101.9758, 14, apikey=apikey, map_styles=style())
 # # question 1
-# markLocation(gmap, courierCoorLats, courierCoorLangs, colorCode)
+markLocation(gmap, courierCoorLats, courierCoorLangs, colorCode)
 
 # # question 2
-# printBeforeDistance(customerOriLats, customerOriLngs,
-#                     customerDestLats, customerDestLngs)
+printBeforeDistance(customerOriLats, customerOriLngs,
+                    customerDestLats, customerDestLngs)
 
 # question 3
 dis = printAfterDistance(customerOriLats, customerOriLngs,
@@ -333,32 +335,35 @@ dis = printAfterDistance(customerOriLats, customerOriLngs,
 # print(distance)
 
 # question 4
-# gmap.plot(*distCust1BefPath, edge_width=7, color='red')
-# gmap.plot(*distCust2BefPath, edge_width=7, color='purple')
-# gmap.plot(*distCust3BefPath, edge_width=7, color='blue')
 
-# for i in range(0,n):
-#     custZip = (customerOriLats[i],customerOriLngs[i])
-#     custDestZip = (customerDestLats[i],customerDestLngs[i])
-#     gmap.directions(custZip, custDestZip)
+for i in range(0,n):
+
+    custZip = (customerOriLats[i],customerOriLngs[i])
+    custDestZip = (customerDestLats[i],customerDestLngs[i])
+    courierlats = courierCoorLats
+    courierlng = courierCoorLangs
+    printbefore(custZip,custDestZip)
+    # final = (custZip,custDestZip)
+    # gmap.directions(custZip, custDestZip)
+    # gmap.plot(final, edge_width=7, color='red')
+markLocation1(courierCoorLats, courierCoorLangs, colorCode)
 
 # after algo
-# for i in range(0, n):
-#     custZip = (customerOriLats[i], customerOriLngs[i])
-#     custDestZip = (customerDestLats[i], customerDestLngs[i])
-#     # gmap.directions(custZip, chosenCourier[i])
-#     gmap.directions(
-#         (customerOriLats[i], customerOriLngs[i]),
-#         (customerDestLats[i], customerDestLngs[i]),
-#         waypoints=[
-#             (courierCoorLats[chosenCourier[i]],
-#              courierCoorLangs[chosenCourier[i]])
-#         ]
-#     )
+for i in range(0, n):
+    custZip = (customerOriLats[i], customerOriLngs[i])
+    custDestZip = (customerDestLats[i], customerDestLngs[i])
+    gmap.directions(
+        (customerOriLats[i], customerOriLngs[i]),
+        (customerDestLats[i], customerDestLngs[i]),
+        waypoints=[
+            (courierCoorLats[chosenCourier[i]],
+             courierCoorLangs[chosenCourier[i]])
+        ]
+    )
 
 hubs = City()
 rating = rateCourierHub(hubs,dis)
 
 recommendation(rating,dis,hubs)
 
-# gmap.draw('map.html')
+gmap.draw('map.html')

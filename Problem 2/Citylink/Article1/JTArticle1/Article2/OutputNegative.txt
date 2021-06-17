@@ -1,10 +1,10 @@
-mishandle
-misunderstanding
-fault
-issue
-damaged
 prejudice
-lost
+issue
+fault
+misunderstanding
 violent
+damaged
+mishandle
 complaints
+lost
 denied

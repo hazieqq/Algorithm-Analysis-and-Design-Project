@@ -1,9 +1,9 @@
-love
-bonus
-special
-consideration
-time
-will
-support
 better
+consideration
 clear
+support
+time
+special
+bonus
+love
+will
