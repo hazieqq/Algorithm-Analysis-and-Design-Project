@@ -252,7 +252,7 @@ def recommendation(rating,distances,hubs):
 
     
     
-apikey = 'AIzaSyCz9ZuEqAI4Sbg0G-F91etEvlhIt1Le0d0'
+apikey = 'YOUR API'
 gmap = gmplot.GoogleMapPlotter(
     4.2105, 101.9758, 14, apikey=apikey, map_styles=style())
 # # question 1
